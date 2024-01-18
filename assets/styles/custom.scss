@@ -1,18 +1,86 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 // Personnalisation des couleurs
-$primary: #52AA5E;   // Bleu
-$secondary: #FB8B24; // Gris
-$success: #57DE8F;   // Vert
-$info: #EDEBEB;      // Turquoise
-$warning: #ffc107;   // Jaune
-$danger: #F56060;    // Rouge
-$light: #FFFFFF;     // Blanc cassé
-$dark: #3C3C3B;      // Noir
+$primary: #52AA5E !default; 
+$bg-primary: #52AA5E !default;
+$secondary: #FB8B24 !default; 
+$success: #57DE8F !default;   
+$info: #EDEBEB !default;    
+$warning: #ffc107 !default;  
+$danger: #F56060 !default;   
+$light: #FFFFFF !default;    
+$dark: #3C3C3B !default;      
+$--bs-primary: #52AA5E !default;
+
+// light versions
+$primary-light: #5fab69 !default;
+$secondary-light: #fa9b42 !default;
+$success-light: #6ae49d !default;
+$info-light: #EDEBEB !default;
+$warning-light: #fec61f !default;
+$danger-light: #ff7474 !default;
+$light-light: #FFFFFF !default;
+$dark-light: #5c5c5b !default;
+
 
 // Personnalisation des polices
 $font-family-base: 'Poppins', sans-serif;
 $font-family-secondary: 'Lobster', cursive;
 
-// Importer les styles de Bootstrap
-@import '~bootstrap/scss/bootstrap';
+$enable-negative-margins: true !default;
+
+$spacers: (
+    0: 0px,
+    1: 0.25rem,
+    2: 0.5rem,
+    3: 0.75rem,
+    4: 1rem,
+    5: 1.25rem,
+    6: 1.5rem,
+    7: 1.75rem,
+    8: 2rem,
+    9: 2.25rem,
+    10: 2.5rem,
+    11: 2.75rem,
+    12: 3rem,
+    14: 3.5rem,
+    16: 4rem,
+    20: 5rem,
+    24: 6rem,
+    28: 7rem,
+    32: 8rem,
+    36: 9rem,
+    40: 10rem,
+    44: 11rem,
+    48: 12rem,
+    52: 13rem,
+    56: 14rem,
+    60: 15rem,
+    64: 16rem,
+    72: 18rem,
+    80: 20rem,
+    96: 24rem
+) !default;
+
+
+@each $size, $value in $spacers {
+  // Marges
+  .m-#{$size} { margin: $value !important; }
+  .mt-#{$size}, .my-#{$size} { margin-top: $value !important; }
+  .mr-#{$size}, .mx-#{$size} { margin-right: $value !important; }
+  .mb-#{$size}, .my-#{$size} { margin-bottom: $value !important; }
+  .ml-#{$size}, .mx-#{$size} { margin-left: $value !important; }
+
+  // Padding
+  .p-#{$size} { padding: $value !important; }
+  .pt-#{$size}, .py-#{$size} { padding-top: $value !important; }
+  .pr-#{$size}, .px-#{$size} { padding-right: $value !important; }
+  .pb-#{$size}, .py-#{$size} { padding-bottom: $value !important; }
+  .pl-#{$size}, .px-#{$size} { padding-left: $value !important; }
+}
+
+@each $size, $value in $spacers {
+  .w-#{$size} { width: $value !important; }
+  .h-#{$size} { height: $value !important; }
+}
+
+

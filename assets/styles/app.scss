@@ -1,37 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-// Personnalisation des couleurs
-$primary: #52AA5E;   // Bleu
-$bg-primary: #52AA5E;
-$secondary: #FB8B24; // Gris
-$success: #57DE8F;   // Vert
-$info: #EDEBEB;      // Turquoise
-$warning: #ffc107;   // Jaune
-$danger: #F56060;    // Rouge
-$light: #FFFFFF;     // Blanc cassé
-$dark: #3C3C3B;      // Noir
-$--bs-primary: #52AA5E;
-
-// Personnalisation des polices
-$font-family-base: 'Poppins', sans-serif;
-$font-family-secondary: 'Lobster', cursive;
-
+@import 'custom.scss';
+@import 'theme.scss';
 @import '~bootstrap/scss/bootstrap';
 
+.mw-0 { max-width: 0rem; }
+.mw-none { max-width: none; }
+.mw-xs { max-width: 20rem; }
+.mw-sm { max-width: 24rem; }
+.mw-md { max-width: 28rem; }
+.mw-lg { max-width: 32rem; }
+.mw-xl { max-width: 36rem; }
+.mw-2xl { max-width: 42rem; }
+.mw-3xl { max-width: 48rem; }
+.mw-4xl { max-width: 56rem; }
+.mw-5xl { max-width: 64rem; }
+.mw-6xl { max-width: 72rem; }
+.mw-7xl { max-width: 80rem; }
 
-h1 {
-    color: red;
+@each $name, $width in $grid-breakpoints {
+    @if $width > 0 {
+        @include media-breakpoint-up($name) {
+            .mw-#{$name}-0 { max-width: 0rem; }
+            .mw-#{$name}-none { max-width: none; }
+            .mw-#{$name}-xs { max-width: 20rem; }
+            .mw-#{$name}-sm { max-width: 24rem; }
+            .mw-#{$name}-md { max-width: 28rem; }
+            .mw-#{$name}-lg { max-width: 32rem; }
+            .mw-#{$name}-xl { max-width: 36rem; }
+            .mw-#{$name}-2xl { max-width: 42rem; }
+            .mw-#{$name}-3xl { max-width: 48rem; }
+            .mw-#{$name}-4xl { max-width: 56rem; }
+            .mw-#{$name}-5xl { max-width: 64rem; }
+            .mw-#{$name}-6xl { max-width: 72rem; }
+            .mw-#{$name}-7xl { max-width: 80rem; }
+        }
+    }
 }
 
-h2 {
-    color: green;
-    font-size: 12px;
-}
 
-h3 {
-    color: blue;;
-}
-
-.home {
-    background-color: yellow;
-    font-size: 40px;
-}

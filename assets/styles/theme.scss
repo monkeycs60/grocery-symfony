@@ -28,14 +28,7 @@ $gray-700: #44526E !default;
 $gray-800: #313B4E !default;
 $gray-900: #1D232F !default;
 
-$primary: #F59460 !default;
-$secondary: #7183A7 !default;
-$success: #57DE8F !default;
-$info: #5475E5 !default;
-$warning: #fcd34d !default;
-$danger: #F56060 !default;
-$light: #E8EDF5 !default;
-$dark: #081132 !default;
+
 
 $primary-light: #F8B490 !default;
 $secondary-light: #909EBB !default;
@@ -196,41 +189,6 @@ $box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
 $box-shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !default;
 $box-shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06) !default;
 
-$spacers: (
-    0: 0px,
-    1: 0.25rem,
-    2: 0.5rem,
-    3: 0.75rem,
-    4: 1rem,
-    5: 1.25rem,
-    6: 1.5rem,
-    7: 1.75rem,
-    8: 2rem,
-    9: 2.25rem,
-    10: 2.5rem,
-    11: 2.75rem,
-    12: 3rem,
-    14: 3.5rem,
-    16: 4rem,
-    20: 5rem,
-    24: 6rem,
-    28: 7rem,
-    32: 8rem,
-    36: 9rem,
-    40: 10rem,
-    44: 11rem,
-    48: 12rem,
-    52: 13rem,
-    56: 14rem,
-    60: 15rem,
-    64: 16rem,
-    72: 18rem,
-    80: 20rem,
-    96: 24rem
-) !default;
-
-$negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) !default;
-
 $alert-border-radius: 0.25rem !default;
 
 $badge-font-size: 0.75rem !default;
@@ -304,3 +262,58 @@ $alert-border-top-right-radius: $alert-border-radius !default;
 $alert-border-top-left-radius: $alert-border-radius !default;
 $alert-border-bottom-right-radius: $alert-border-radius !default;
 $alert-border-bottom-left-radius: $alert-border-radius !default;
+
+body {
+    @if $enable-antialiasing {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+.alert {
+    color: $alert-color;
+    font-size: $alert-font-size;
+
+    border-top-width: $alert-border-top-width;
+    border-right-width: $alert-border-right-width;
+    border-bottom-width: $alert-border-bottom-width;
+    border-left-width: $alert-border-left-width;
+
+    @if $enable-rounded {
+        border-top-right-radius: $alert-border-top-right-radius;
+        border-top-left-radius: $alert-border-top-left-radius;
+        border-bottom-right-radius: $alert-border-bottom-right-radius;
+        border-bottom-left-radius: $alert-border-bottom-left-radius;
+    } @else {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+.badge {
+    text-transform: $badge-text-transform;
+}
+
+.btn {
+    text-transform: $btn-text-transform;
+}
+
+.navbar-toggler {
+    border: $navbar-toggler-border solid transparent !important;
+}
+
+.medium {
+    font-size: $font-size-sm;
+}
+
+.row .container,
+.container .container {
+    max-width: none;
+    width: auto;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
