@@ -1,0 +1,41 @@
+// homepage filter
+.chevron-up svg {
+    rotate: 180deg;
+}
+
+// bouton promotion toggle dans filter homepage
+.promotionToggle {
+    background: grey !important;
+    color: white !important;
+}
+
+.category-container {
+    margin-top: 10px;
+}
+
+.category-btn {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    display: block;
+}
+
+.category-btn.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.sub-categories {
+    display: none;
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+.sub-categories label {
+    display: block;
+    margin-top: 5px;
+}
+
+.sub-category-checkbox {
+    margin-right: 5px;
+}

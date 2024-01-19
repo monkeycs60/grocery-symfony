@@ -40,10 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
-   const chevronSortBy = document.getElementById('chevron-icon-sortby');
+    // chevrons behavior for dropdown filter homepage
+    const chevronSortBy = document.getElementById('chevron-icon-sortby');
    const dropdownSortBy = document.getElementById('select-dropdown-sortby');
 
    const chevronOrigin = document.getElementById('chevron-icon-origin');
@@ -65,4 +64,31 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleChevron(chevronOrigin, dropdownOrigin);
         });
     }
+
+    // btn promotion toggle
+     const btnPromotion = document.getElementById('btn-promotion');
+    btnPromotion.addEventListener('click', function() {
+        btnPromotion.classList.toggle('promotionToggle');
+    }
+    );
+});
+
+
+
+
+document.querySelectorAll('.category-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        var category = this.textContent;
+        var subCategories = document.querySelector('.sub-categories[data-category="' + category + '"]');
+        
+        // Si le bouton est déjà actif, masquer les sous-catégories
+        if (this.classList.contains('active')) {
+            this.classList.remove('active');
+            subCategories.style.display = 'none';
+        } else {
+            // Si le bouton n'est pas actif, afficher les sous-catégories
+            this.classList.add('active');
+            subCategories.style.display = 'block';
+        }
+    });
 });
