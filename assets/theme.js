@@ -1,5 +1,7 @@
-// Burger menus
+// Listeners for btn behavior
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Burger menus
     // open
     const burger = document.querySelectorAll('.navbar-burger');
     const menu = document.querySelectorAll('.navbar-menu');
@@ -75,20 +77,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 document.querySelectorAll('.category-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
+        // Fermer toutes les catégories ouvertes
+        document.querySelectorAll('.category-btn').forEach(function(otherBtn) {
+            otherBtn.classList.remove('active');
+            var otherCategory = otherBtn.textContent;
+            var otherSubCategories = document.querySelector('.sub-categories[data-category="' + otherCategory + '"]');
+            otherSubCategories.classList.remove('active');
+        });
+
+        // Ouvrir la catégorie cliquée si elle n'était pas déjà ouverte
         var category = this.textContent;
         var subCategories = document.querySelector('.sub-categories[data-category="' + category + '"]');
-        
-        // Si le bouton est déjà actif, masquer les sous-catégories
-        if (this.classList.contains('active')) {
-            this.classList.remove('active');
-            subCategories.style.display = 'none';
-        } else {
-            // Si le bouton n'est pas actif, afficher les sous-catégories
+        if (!this.classList.contains('active')) {
             this.classList.add('active');
-            subCategories.style.display = 'block';
+            subCategories.classList.add('active');
         }
     });
 });

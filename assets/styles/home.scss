@@ -21,14 +21,19 @@
 }
 
 .category-btn.active {
-    background-color: #007bff;
+    background-color: gray;
     color: #fff;
 }
 
 .sub-categories {
-    display: none;
-    margin-top: 5px;
-    padding-left: 20px;
+    display: block;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+}
+
+.sub-categories.active {
+    max-height: 200px; /* Ajustez cette valeur en fonction de la hauteur maximale attendue pour les sous-catégories */
 }
 
 .sub-categories label {
