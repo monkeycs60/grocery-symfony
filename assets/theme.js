@@ -73,26 +73,40 @@ document.addEventListener('DOMContentLoaded', function() {
         btnPromotion.classList.toggle('promotionToggle');
     }
     );
-});
 
-
-
-document.querySelectorAll('.category-btn').forEach(function(btn) {
+    // categories and subcategories toggle
+   document.querySelectorAll('.category-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-        // Fermer toutes les catégories ouvertes
-        document.querySelectorAll('.category-btn').forEach(function(otherBtn) {
-            otherBtn.classList.remove('active');
-            var otherCategory = otherBtn.textContent;
-            var otherSubCategories = document.querySelector('.sub-categories[data-category="' + otherCategory + '"]');
-            otherSubCategories.classList.remove('active');
-        });
-
-        // Ouvrir la catégorie cliquée si elle n'était pas déjà ouverte
         var category = this.textContent;
         var subCategories = document.querySelector('.sub-categories[data-category="' + category + '"]');
-        if (!this.classList.contains('active')) {
+
+        // Vérifier si la catégorie actuelle est déjà ouverte
+        if (this.classList.contains('active')) {
+            // Fermer la catégorie actuelle
+            this.classList.remove('active');
+            subCategories.classList.remove('active');
+            subCategories.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
+        } else {
+            // Fermer toutes les catégories ouvertes et décocher leurs checkboxes
+            document.querySelectorAll('.category-btn').forEach(function(otherBtn) {
+                otherBtn.classList.remove('active');
+                var otherCategory = otherBtn.textContent;
+                var otherSubCategories = document.querySelector('.sub-categories[data-category="' + otherCategory + '"]');
+                otherSubCategories.classList.remove('active');
+                otherSubCategories.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+                    checkbox.checked = false;
+                });
+            });
+
+            // Ouvrir la catégorie cliquée
             this.classList.add('active');
             subCategories.classList.add('active');
         }
     });
 });
+});
+
+
+
