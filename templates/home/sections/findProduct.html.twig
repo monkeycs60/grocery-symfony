@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-4">
-				<div class="d-block d-sm-inline-block pt-9 pb-12 pb-md-24 ps-12 pe-8 bg-secondary rounded-3">
+				<div class="d-block d-sm-inline-block pt-9 pb-12 pb-md-4 ps-12 pe-8 bg-secondary rounded-3">
 					<div class="mb-10">
 						<h6 class="d-inline-block mb-5 text-primary-gradient">Rayon</h6>
 						<div class="d-flex mb-2 align-items-center">
@@ -15,22 +15,6 @@
 						</div>
 						<div class="d-flex mb-2 align-items-center">
 							<input class="form-check-input me-3 border-dark-light" type="radio" name="category"><span class="ms-3 fw-medium text-light">Fruits et légumes</span>
-
-						</div>
-					</div>
-					<div class="mb-10">
-						<h6 class="d-inline-block mb-5 text-primary-gradient">Origine</h6>
-						<div class="d-flex mb-2 align-items-center">
-							<input class="form-check-input me-3 border-dark-light" type="radio" name="origin"><span class="ms-3 fw-medium text-light">France</span>
-						</div>
-						<div class="d-flex mb-2 align-items-center">
-							<input class="form-check-input me-3 border-dark-light" type="radio" name="origin"><span class="ms-3 fw-medium text-light">Italie</span>
-						</div>
-						<div class="d-flex mb-2 align-items-center">
-							<input class="form-check-input me-3 border-dark-light" type="radio" name="origin"><span class="ms-3 fw-medium text-light">Espagne</span>
-						</div>
-						<div class="d-flex align-items-center">
-							<input class="form-check-input me-3 border-dark-light" type="radio" name="origin"><span class="ms-3 fw-medium text-light">Reste du monde</span>
 
 						</div>
 					</div>
@@ -74,62 +58,32 @@
 							</div>
 						</div>
 					</div>
-					<div class="mb-10">
-						<h6 class="d-inline-block mb-5 text-primary-gradient">Statut</h6>
-						<div class="d-flex align-items-center">
-							<input class="form-check-input me-3 border-dark-light" type="checkbox"><span class="ms-3 fw-medium text-light">En promotion</span>
-						</div>
-						<div class="d-flex align-items-center">
-							<input class="form-check-input me-3 border-dark-light" type="checkbox"><span class="ms-3 fw-medium text-light">Disponible</span>
-						</div>
-						<div class="d-flex align-items-center">
-							<input class="form-check-input me-3 border-dark-light" type="checkbox"><span class="ms-3 fw-medium text-light">Rupture de stock</span>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div class="col-12 col-md-8">
 				<div class="d-flex mb-12">
 					<div class="position-relative me-4 border-light-dark">
-						<span class="position-absolute top-0 end-0 me-4 mt-3">
-							<svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd" clip-rule="evenodd" d="M0.96967 0.71967C1.26256 0.426777 1.73744 0.426777 2.03033 0.71967L6 4.68934L9.96967 0.71967C10.2626 0.426777 10.7374 0.426777 11.0303 0.71967C11.3232 1.01256 11.3232 1.48744 11.0303 1.78033L6.53033 6.28033C6.23744 6.57322 5.76256 6.57322 5.46967 6.28033L0.96967 1.78033C0.676777 1.48744 0.676777 1.01256 0.96967 0.71967Z" fill="white"></path>
-							</svg>
+						<span class="position-absolute top-0 end-0 me-4 mt-3" id="chevron-icon-sortby">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
 						</span>
-						<select class="position-relative form-control w-full ps-6 pe-10 py-4 bg-transparent fw-medium" name="" id="">
-							<option value="1">Sort by</option>
-							<option value="2">Price</option>
-							<option value="3">Ratings</option>
-							<option value="4">Popularity</option>
+						<select class="position-relative form-control w-full ps-6 pe-10 py-4 bg-transparent fw-medium" name="" id="select-dropdown-sortby">
+							<option value="" disabled selected>Trier par</option>
+							<option value="1">Prix le plus bas</option>
+							<option value="2">Prix le plus haut</option>
 						</select>
 					</div>
 					<div class="position-relative me-4 border-light-dark">
-						<span class="position-absolute top-0 end-0 me-4 mt-3">
-							<svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd" clip-rule="evenodd" d="M0.96967 0.71967C1.26256 0.426777 1.73744 0.426777 2.03033 0.71967L6 4.68934L9.96967 0.71967C10.2626 0.426777 10.7374 0.426777 11.0303 0.71967C11.3232 1.01256 11.3232 1.48744 11.0303 1.78033L6.53033 6.28033C6.23744 6.57322 5.76256 6.57322 5.46967 6.28033L0.96967 1.78033C0.676777 1.48744 0.676777 1.01256 0.96967 0.71967Z" fill="white"></path>
-							</svg>
+						<span class="position-absolute top-0 end-0 me-4 mt-3" id="chevron-icon-origin">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
 						</span>
-						<select class="position-relative form-control w-full ps-6 pe-10 py-4 bg-transparent fw-medium" name="" id="">
-							<option value="1">Category</option>
-							<option value="2">Clothes</option>
-							<option value="3">Home</option>
-							<option value="4">Kids</option>
+						<select class="position-relative form-control w-full ps-6 pe-10 py-4 bg-transparent fw-medium" name="" id="select-dropdown-origin">
+
+							<option value="" disabled selected>Origine</option>
+							<option value="1">France</option>
+							<option value="2">Italie</option>
+							<option value="3">Espagne</option>
+							<option value="4">Reste du monde</option>
 						</select>
-					</div>
-					<div>
-						<div class="position-relative border-light-dark">
-							<span class="position-absolute top-0 end-0 me-4 mt-3">
-								<svg width="12" height="7" viewbox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path fill-rule="evenodd" clip-rule="evenodd" d="M0.96967 0.71967C1.26256 0.426777 1.73744 0.426777 2.03033 0.71967L6 4.68934L9.96967 0.71967C10.2626 0.426777 10.7374 0.426777 11.0303 0.71967C11.3232 1.01256 11.3232 1.48744 11.0303 1.78033L6.53033 6.28033C6.23744 6.57322 5.76256 6.57322 5.46967 6.28033L0.96967 1.78033C0.676777 1.48744 0.676777 1.01256 0.96967 0.71967Z" fill="white"></path>
-								</svg>
-							</span>
-							<select class="position-relative form-control w-full ps-6 pe-10 py-4 bg-transparent fw-medium" name="" id="">
-								<option value="1">Size</option>
-								<option value="2">S</option>
-								<option value="3">M</option>
-								<option value="4">XL</option>
-							</select>
-						</div>
 					</div>
 				</div>
 				<div class="row px-3 mb-20">

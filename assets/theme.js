@@ -41,3 +41,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+   const chevronSortBy = document.getElementById('chevron-icon-sortby');
+   const dropdownSortBy = document.getElementById('select-dropdown-sortby');
+
+   const chevronOrigin = document.getElementById('chevron-icon-origin');
+   const dropdownOrigin = document.getElementById('select-dropdown-origin');
+
+    function toggleChevron(chevron) {
+        chevron.classList.toggle('chevron-down');
+        chevron.classList.toggle('chevron-up');
+    }
+
+    if (chevronSortBy && dropdownSortBy) {
+        dropdownSortBy.addEventListener('click', function() {
+            toggleChevron(chevronSortBy, dropdownSortBy);
+        });
+    }
+
+    if (chevronOrigin && dropdownOrigin) {
+        dropdownOrigin.addEventListener('click', function() {
+            toggleChevron(chevronOrigin, dropdownOrigin);
+        });
+    }
+});
