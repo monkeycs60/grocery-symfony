@@ -22,5 +22,13 @@
     font-size: 1.5rem;
 }
 
+// hover effect 
+.hover-effect {
+    &:hover {
+        background-color: #fa983c;
+    }
+    transition: all 0.3s ease-in-out;
+}
+
 
 
