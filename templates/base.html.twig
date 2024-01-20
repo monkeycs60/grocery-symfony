@@ -15,17 +15,16 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body class="">
-		{% include '_partials/_header.html.twig' %}
-		<main style="padding-top: 70px;">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-12 col-lg-10"> {% block body %}{% endblock %}
-						</div>
+	<body class=""></body>
+	{% include '_partials/_header.html.twig' %}
+	<main style="padding-top: 70px;">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-12 col-lg-10"> {% block body %}{% endblock %}
 					</div>
 				</div>
-			</main>
-
-			{% include '_partials/_footer.html.twig' %}
-		</body>
+			</div>
+		</main>
+		{% include '_partials/_footer.html.twig' %}
 	</html>
+</body></html>
