@@ -69,12 +69,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // btn promotion toggle
      const btnPromotion = document.getElementById('btn-promotion');
+     if (btnPromotion) {
     btnPromotion.addEventListener('click', function() {
         btnPromotion.classList.toggle('promotionToggle');
     }
     );
+        }
 
     // categories and subcategories toggle
+    if (
+        document.querySelector('.category-btn') &&
+        document.querySelector('.sub-categories')
+    ) {
    document.querySelectorAll('.category-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
         var category = this.textContent;
@@ -106,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+    }
 });
 
 
