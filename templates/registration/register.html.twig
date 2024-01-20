@@ -4,17 +4,32 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Register</h1>
-
-	{{ form_errors(registrationForm) }}
-
-	{{ form_start(registrationForm) }}
-	{{ form_row(registrationForm.email) }}
-	{{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-	{{ form_row(registrationForm.agreeTerms) }}
-
-	<button type="submit" class="btn">Register</button>
-	{{ form_end(registrationForm) }}
+	<section class="overflow-hidden">
+		<div class="container">
+			<div class="d-flex justify-content-center align-items-center pt-8">
+				<a class="d-inline-block h6" href="{{ path('app_home') }}">
+					<img class="img-fluid" src="https://static.shuffle.dev/uploads/files/3e/3ee2673ade3684a7f46fa65550b3fd0519b1e8e9/culinaria-logo.png" alt="Logo">
+				</a>
+			</div>
+			<div
+				class="row align-items-center small-font-size">
+				<!-- Colonne de gauche pour le formulaire -->
+				<div class="col-lg-6">
+					<div class="py-2 text-center">
+						<h2 class="mb-8 large-font-size">Signing up with social is super quick</h2>
+						<p class="mb-10">Please, do not hesitate</p>
+						{{ form_start(registrationForm, {'attr': {'class': 'form'}}) }}
+						{{ form_row(registrationForm.email, {'attr': {'class': 'form-control form-control-lg mb-2', 'placeholder': 'john@example.com'}}) }}
+						{{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control form-control-lg mb-2', 'placeholder': 'Password'}}) }}
+						{{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+						<button class="mt-12 mt-md-2 btn btn-dark d-block" type="submit">Je m'inscris</button>
+						{{ form_end(registrationForm) }}
+					</div>
+				</div>
+				<div class="col-lg-6 d-none d-lg-block">
+					<img class="w-100 h-100" src="{{ asset('images/register-bg.jpg') }}" alt="Registration">
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

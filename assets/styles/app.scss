@@ -2,11 +2,20 @@
 @import 'theme.scss';
 @import '~bootstrap/scss/bootstrap';
 @import 'max-width-size.scss';
+@import 'form.scss';
 @import 'home.scss';
 
 // font size utility
 .small-font-size {
     font-size: 0.8rem;
+}
+
+.medium-font-size {
+    font-size: 1rem;
+}
+
+.large-font-size {
+    font-size: 1.2rem;
 }
 
 
