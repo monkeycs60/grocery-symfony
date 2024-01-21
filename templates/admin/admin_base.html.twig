@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panneau d'administration -
+	{{ block('title') }}
+{% endblock %}
+
+{% block body %}
+	<div class="bg-light" style="">
+		<div class="row flex-nowrap">
+			<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+				<div class="d-flex flex-column align-items-center align-items-sm-start gap-4 px-3 pt-2 text-white min-vh-100">
+					<div href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+						<span class="fs-5 d-none d-sm-inline">Menu</span>
+					</div>
+					<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center gap-2 align-items-sm-start pt-8" id="menu">
+						<li>
+							<a href="{{ path('app_admin_dashboard') }}" class=" nav-link {{ app.request.attributes.get('_route') == 'app_admin_dashboard' ? 'active' : 'inactive' }} px-0 align-middle">
+								<span class="ms-1 d-none d-sm-inline text-light">Dashboard</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{ path('app_admin_products') }}" class="nav-link  {{ app.request.attributes.get('_route') == 'app_admin_products' ? 'active' : 'inactive' }} px-0 align-middle">
+								<span class="ms-1 d-none d-sm-inline text-light">Produits</span>
+							</a>
+						</li>
+						<li>
+							<a href="{{ path('app_admin_stocks') }}" class="nav-link {{ app.request.attributes.get('_route') == 'app_admin_stocks' ? 'active' : 'inactive' }} px-0 align-middle">
+								<span class="ms-1 text-light">Stocks</span>
+							</a>
+						</li>
+					</li>
+					<li>
+						<a href="{{ path('app_admin_categories') }}" class="nav-link {{ app.request.attributes.get('_route') == 'app_admin_categories' ? 'active' : 'inactive' }} px-0 align-middle">
+							<span class="ms-1 d-none d-sm-inline text-light">Catégories</span>
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('app_admin_subcategories') }}" class="nav-link {{ app.request.attributes.get('_route') == 'app_admin_subcategories' ? 'active' : 'inactive' }} px-0 align-middle">
+
+							<span class="ms-1 d-none d-sm-inline text-light">Sous-catégories</span>
+						</a>
+					</li>
+					<li>
+						<a href="{{ path('app_admin_users') }}" class="nav-link {{ app.request.attributes.get('_route') == 'app_admin_users' ? 'active' : 'inactive' }} px-0 align-middle">
+							<span class="ms-1 d-none d-sm-inline text-light">Utilisateurs</span>
+						</a>
+					</li>
+				</ul>
+				<hr>
+
+			</div>
+		</div>
+
+		<div class="col">
+			{% block admincontent %}{% endblock %}
+		</div>
+	</div>
+</div>{% endblock %}

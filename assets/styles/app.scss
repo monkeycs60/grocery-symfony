@@ -33,5 +33,15 @@
     transition: all 0.3s ease-in-out;
 }
 
+.nav-link.active {
+    color: white !important; 
+    background: #FB8B24 !important;
+    padding: 2px 5px !important;
+}
+
+.nav-link.inactive {
+    color: #52AA5E; /* couleur pour les liens non actifs */
+}
+
 
 
