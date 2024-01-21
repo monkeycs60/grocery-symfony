@@ -6,6 +6,15 @@
 {% endblock %}
 
 {% block body %}
+{% if app.user %}
+	<div class="mb-3 d-flex flex-column justify-content-center align-items-center gap-4" style="min-height: 50vh">
+		<p>Vous êtes connecté en tant que
+			<span class='fw-bolder'>{{ app.user.userIdentifier }}</span>
+
+		</p>
+		<a href="{{ path('app_logout') }}">Se déconnecter</a>
+	</div>
+{% else %}
 	<section class="overflow-hidden">
 		<div class="container mt-16">
 			<div
@@ -40,4 +49,5 @@
 			</div>
 		</div>
 	</section>
+{% endif %}
 {% endblock %}

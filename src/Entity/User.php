@@ -29,6 +29,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $address = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $deliveryPreference = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,5 +106,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): static
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): static
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getDeliveryPreference(): ?string
+    {
+        return $this->deliveryPreference;
+    }
+
+    public function setDeliveryPreference(string $deliveryPreference): static
+    {
+        $this->deliveryPreference = $deliveryPreference;
+
+        return $this;
     }
 }
