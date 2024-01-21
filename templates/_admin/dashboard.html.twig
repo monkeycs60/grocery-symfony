@@ -1,13 +1,18 @@
-{% extends '@EasyAdmin/page/content.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Pannel administration
+{% endblock %}
+
+{% block admincontent %}
 
 
-{% block main %}
-	<div>
+	<div class="w-100 h-100 d-flex flex-column gap-0 pt-16 text-center px-12">
 		<p class="large-font-size fw-bold mb-6">
 			Bienvenue sur le pannel d'administration de Culinaria.
 		</p>
 		<p>Ici, vous pourrez gérer les produits, les stocks, les catégories, les sous-catégories.</p>
 		<p>Vous pourrez aussi consulter le profil des autres utilisateurs</p>
-
 	</div>
+
+
 {% endblock %}
