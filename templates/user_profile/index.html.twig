@@ -4,29 +4,5 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-4 big-font large-font-size">
-		<h1>Bienvenue
-			{{ app.user.username }}
-			sur votre page de profil !</h1>
-		{{ form_start(profileForm, {'attr': {'class': ''}}) }}
-
-		<div class="mb-3">
-			{{ form_row(profileForm.username, {'attr': {'class': ''}}) }}
-
-		</div>
-		<div class="mb-3">
-			{{ form_row(profileForm.plainPassword, {'attr': {'class': ''}}) }}
-
-		</div>
-		<div class="mb-3">
-			{{ form_row(profileForm.address, {'attr': {'class': ''}}) }}
-		</div>
-		<div class="mb-3">
-			{{ form_row(profileForm.deliveryPreference, {'attr': {'class': ''}}) }}
-		</div>
-		<div>
-			<button class="btn btn-primary">Mettre à jour</button>
-		</div>
-		{{ form_end(profileForm) }}
-	</div>
+	{% include 'user_profile/modify.html.twig' %}
 {% endblock %}

@@ -18,10 +18,9 @@ class UserProfileType extends AbstractType
         $builder
         ->add('username', TextType::class,
         [
+            'required' => false,
+            'label' => 'Nom d\'utilisateur',
             'constraints' => [
-                new NotBlank([
-                    'message' => "Merci d'entrer un nom d'utilisateur",
-                ]),
                 new Length([
                     'min' => 3,
                     'minMessage' => 'Votre nom d\'utilisateur doit contenir au moins {{ limit }} caractères',
@@ -34,13 +33,11 @@ class UserProfileType extends AbstractType
         ->add('plainPassword', PasswordType::class, [
                                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'label' => "Mot de passe",
+                'required' => false,
+                'label' => "Nouveau mot de passe",
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci d\'entrer un mot de passe',
-                    ]),
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
@@ -51,11 +48,9 @@ class UserProfileType extends AbstractType
             ])
         ->add('address', TextType::class,
         [
+            'required' => false,
             'label' => 'Adresse',
             'constraints' => [
-                new NotBlank([
-                    'message' => "Merci d'entrer une adresse",
-                ]),
                 new Length([
                     'min' => 3,
                     'minMessage' => 'Votre adresse doit contenir au moins {{ limit }} caractères',
@@ -66,6 +61,8 @@ class UserProfileType extends AbstractType
         ]
         )
         ->add('deliveryPreference', ChoiceType::class, [
+            'required' => false,
+            'label' => 'Préférence de livraison',
             'choices' => [
                 'En magasin' => 'en magasin',
                 'Livraison à domicile' => 'livraison à domicile',

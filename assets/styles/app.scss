@@ -5,7 +5,10 @@
 @import 'form.scss';
 @import 'home.scss';
 
-// font size utility
+.mini-font-size {
+    font-size: 0.5rem;
+}
+
 .small-font-size {
     font-size: 0.8rem;
 }

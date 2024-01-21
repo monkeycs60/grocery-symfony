@@ -25,16 +25,27 @@ class UserProfileController extends AbstractController
     $form->handleRequest($request);
 
      if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($form->get('username')->getData() !== null) {
+        $user->setUsername($form->get('username')->getData());
+    }
+        
+        if ($form->get('address')->getData() !== null) {
+        $user->setAddress($form->get('address')->getData());
+    }
+
+        if ($form->get('deliveryPreference')->getData() !== null) {
+        $user->setDeliveryPreference($form->get('deliveryPreference')->getData());
+    }
+
+
         // Vérifiez si le champ de mot de passe a été rempli
-        $plainPassword = $form->get('plainPassword')->getData();
-        if ($plainPassword) {
-            // Hash le mot de passe avant de le sauvegarder
-            $hashedPassword = $passwordHasher->hashPassword(
-                $user,
-                $plainPassword
-            );
-            $user->setPassword($hashedPassword);
-        }
+         $plainPassword = $form->get('plainPassword')->getData();
+    if (!empty($plainPassword)) {
+        $user->setPassword(
+            $passwordHasher->hashPassword($user, $plainPassword)
+        );
+    }
 
         // Les autres champs sont gérés normalement
         $entityManager->persist($user);

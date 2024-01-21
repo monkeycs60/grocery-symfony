@@ -1,0 +1,39 @@
+<div class="container mt-4 big-font large-font-size mt-12">
+	<h4>
+		{% if is_granted('ROLE_ADMIN') %}
+			<p>Bienvenue
+				{{ app.user.username }},
+																										
+																																tu es connecté en tant qu'administrateur.</p>
+		{% else %}
+			<p>
+				Bienvenue
+				{{ app.user.username }}, tu es connecté en tant que membre.</p>
+
+
+		{% endif %}
+	</h4>
+	<div class="w-50 ">
+		{{ form_start(profileForm, {'attr': {'class': ''}}) }}
+
+		<div class="mb-3">
+			{{ form_row(profileForm.username, {'attr': {'class': ''}}) }}
+
+		</div>
+		<div class="mb-3">
+			{{ form_row(profileForm.plainPassword, {'attr': {'class': ''}}) }}
+
+		</div>
+		<div class="mb-3">
+			{{ form_row(profileForm.address, {'attr': {'class': ''}}) }}
+		</div>
+		<div class="mb-3">
+			{{ form_row(profileForm.deliveryPreference, {'attr': {'class': ''}}) }}
+		</div>
+		<div>
+			<button class="btn btn-secondary py-3 px-4 medium-font-size">Mettre à jour</button>
+
+		</div>
+		{{ form_end(profileForm) }}
+	</div>
+</div>
