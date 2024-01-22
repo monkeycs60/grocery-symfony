@@ -18,12 +18,15 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Subcategory::class, orphanRemoval: true)]
-    private Collection $subcategories;
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'categories')]
+    private ?Category $parent = null;
+
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Category::class)]
+    private Collection $categories;
 
     public function __construct()
     {
-        $this->subcategories = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,33 +46,45 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection<int, Subcategory>
-     */
-    public function getSubcategories(): Collection
+     public function getParent(): ?Category
     {
-        return $this->subcategories;
+        return $this->parent;
     }
 
-    public function addSubcategory(Subcategory $subcategory): static
+    public function setParent(?Category $parent): self
     {
-        if (!$this->subcategories->contains($subcategory)) {
-            $this->subcategories->add($subcategory);
-            $subcategory->setCategory($this);
+        $this->parent = $parent;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->setParent($this);
         }
 
         return $this;
     }
 
-    public function removeSubcategory(Subcategory $subcategory): static
+    public function removeCategory(Category $category): static
     {
-        if ($this->subcategories->removeElement($subcategory)) {
+        if ($this->categories->removeElement($category)) {
             // set the owning side to null (unless already changed)
-            if ($subcategory->getCategory() === $this) {
-                $subcategory->setCategory(null);
+            if ($category->getParent() === $this) {
+                $category->setParent(null);
             }
         }
 
         return $this;
     }
+
 }
