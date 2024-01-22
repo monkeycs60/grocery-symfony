@@ -3,13 +3,17 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Common\Collections\Collection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -26,7 +30,8 @@ class ProductCrudController extends AbstractCrudController
         return $crud
         ->setEntityLabelInSingular('Produit')
         ->setEntityLabelInPlural('Produits')
-        ->setSearchFields(['id', 'title', 'description']);
+        ->setSearchFields(['id', 'title', 'description', 'name', 'price', 'category', 'subcategory'])
+        ->setPageTitle(Crud::PAGE_DETAIL, fn (Product $product) => (string) $product->getName());
     }
 
     
@@ -37,7 +42,8 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('slug'),
             TextField::new('name'),
             TextField::new('description'),
-            NumberField::new('price'),
+            MoneyField::new('price')
+            ->setCurrency('EUR'),
             CollectionField::new('images')
             ->setEntryType(\App\Form\ImageType::class)
             ->setFormTypeOption('by_reference', false)
@@ -55,5 +61,12 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('volume'),
         ];
     }
-    
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+        ->add(Crud::PAGE_INDEX, Action::DETAIL);
+    }
 }
+    
+

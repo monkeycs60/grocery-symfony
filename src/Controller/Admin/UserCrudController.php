@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
@@ -22,7 +24,8 @@ class UserCrudController extends AbstractCrudController
         return $crud
         ->setEntityLabelInSingular('Utilisateur')
         ->setEntityLabelInPlural('Utilisateurs')
-        ->setSearchFields(['id', 'email', 'username', 'address', 'deliveryPreference', 'roles']);
+        ->setSearchFields(['id', 'email', 'username', 'address', 'deliveryPreference', 'roles'])
+        ->setPageTitle(Crud::PAGE_DETAIL, fn (User $user) => (string) $user->getEmail());
     }
 
     
@@ -37,6 +40,12 @@ class UserCrudController extends AbstractCrudController
             ArrayField::new('roles'),
 
         ];
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+        ->add(Crud::PAGE_INDEX, Action::DETAIL);
     }
     
 }
