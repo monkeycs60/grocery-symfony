@@ -27,11 +27,7 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $category = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $subcategory = null;
+   
 
     #[ORM\Column]
     private ?int $stockquantity = null;
@@ -60,6 +56,10 @@ class Product
 
     #[ORM\ManyToMany(targetEntity: QualityLabel::class, inversedBy: 'products')]
     private Collection $qualitylabels;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
  
 
@@ -106,30 +106,6 @@ class Product
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): static
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    public function getSubcategory(): ?string
-    {
-        return $this->subcategory;
-    }
-
-    public function setSubcategory(string $subcategory): static
-    {
-        $this->subcategory = $subcategory;
 
         return $this;
     }
@@ -257,6 +233,18 @@ class Product
     public function removeQualitylabel(QualityLabel $qualitylabel): static
     {
         $this->qualitylabels->removeElement($qualitylabel);
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

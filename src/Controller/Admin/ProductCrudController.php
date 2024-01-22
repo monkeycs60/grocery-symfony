@@ -17,6 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -30,7 +31,7 @@ class ProductCrudController extends AbstractCrudController
         return $crud
         ->setEntityLabelInSingular('Produit')
         ->setEntityLabelInPlural('Produits')
-        ->setSearchFields(['id', 'title', 'description', 'name', 'price', 'category', 'subcategory'])
+        ->setSearchFields(['id', 'title', 'description', 'name', 'price', 'category'])
         ->setPageTitle(Crud::PAGE_DETAIL, fn (Product $product) => (string) $product->getName());
     }
 
@@ -41,6 +42,7 @@ class ProductCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('slug'),
             TextField::new('name'),
+            AssociationField::new('category'),
             TextField::new('description'),
             MoneyField::new('price')
             ->setCurrency('EUR'),
@@ -51,13 +53,14 @@ class ProductCrudController extends AbstractCrudController
             CollectionField::new('images')
             ->setTemplatePath('form/images_upload.html.twig')
             ->onlyOnDetail(),
-            TextField::new('category'),
-            TextField::new('subcategory'),
             NumberField::new('stockquantity'),
             NumberField::new('discount'),
-            ArrayField::new('qualitylabels'),
-            TextField::new('nutriscore'),
-            TextField::new('origin'),
+            AssociationField::new('qualitylabels')
+            ->setFormTypeOptions([
+                'by_reference' => false,
+            ]),
+            AssociationField::new('nutriscore'),
+            AssociationField::new('origin'),
             TextField::new('volume'),
         ];
     }
