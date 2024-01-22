@@ -1,0 +1,22 @@
+{# Styling au top afin de superset les styles d'EasyAdmin #}
+
+<style>
+	.img-thumbnail-container {
+		display: flex !important;
+		gap: 10px;
+		width: 300px !important;
+	}
+
+	.img-thumbnail {
+		width: 60px;
+		height: 50px;
+		border: 1px solid black;
+	}
+</style>
+
+
+<div class="img-thumbnail-container">
+	{% for image in field.value %}
+		<img src="/images/products/{{image.imageName}}" alt="upload image" class="img-thumbnail">
+	{% endfor %}
+</div>

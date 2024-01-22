@@ -3,9 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use Doctrine\Common\Collections\Collection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -36,11 +38,13 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('name'),
             TextField::new('description'),
             NumberField::new('price'),
-            TextField::new('imageFile')
-            ->setFormType(\Vich\UploaderBundle\Form\Type\VichImageType::class)->onlyWhenCreating()
-            ,
-            ImageField::new('imageName')
-                ->setBasePath('/images/products')->onlyOnIndex(),
+            CollectionField::new('images')
+            ->setEntryType(\App\Form\ImageType::class)
+            ->setFormTypeOption('by_reference', false)
+            ->onlyOnForms(),
+            CollectionField::new('images')
+            ->setTemplatePath('form/images_upload.html.twig')
+            ->onlyOnDetail(),
             TextField::new('category'),
             TextField::new('subcategory'),
             NumberField::new('stockquantity'),
