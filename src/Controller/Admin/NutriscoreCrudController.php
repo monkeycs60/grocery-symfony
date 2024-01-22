@@ -23,7 +23,7 @@ class NutriscoreCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Nutriscore')
             ->setEntityLabelInPlural('Nutriscores')
-            ->setSearchFields(['id', 'name'])
+            ->setSearchFields(['id', 'score'])
             ->setPageTitle(Crud::PAGE_DETAIL, fn (Nutriscore $nutriscore) => (string) $nutriscore->getScore());
     }
     
