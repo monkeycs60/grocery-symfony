@@ -39,14 +39,7 @@ class Product
     #[ORM\Column]
     private ?int $discount = null;
 
-    #[ORM\Column(type: Types::JSON, nullable: true)]
-    private ?array $qualitylabels = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $nutriscore = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $origin = null;
+  
 
     #[ORM\Column(length: 255)]
     private ?string $volume = null;
@@ -57,11 +50,23 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Nutriscore $nutriscore = null;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Origin $origin = null;
+
+    #[ORM\ManyToMany(targetEntity: QualityLabel::class, inversedBy: 'products')]
+    private Collection $qualitylabels;
+
  
 
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->qualitylabels = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,41 +158,6 @@ class Product
         return $this;
     }
 
-    public function getQualitylabels(): ?array
-    {
-        return $this->qualitylabels;
-    }
-
-    public function setQualitylabels(?array $qualitylabels): static
-    {
-        $this->qualitylabels = $qualitylabels;
-
-        return $this;
-    }
-
-    public function getNutriscore(): ?string
-    {
-        return $this->nutriscore;
-    }
-
-    public function setNutriscore(string $nutriscore): static
-    {
-        $this->nutriscore = $nutriscore;
-
-        return $this;
-    }
-
-    public function getOrigin(): ?string
-    {
-        return $this->origin;
-    }
-
-    public function setOrigin(string $origin): static
-    {
-        $this->origin = $origin;
-
-        return $this;
-    }
 
     public function getVolume(): ?string
     {
@@ -239,6 +209,54 @@ class Product
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getNutriscore(): ?Nutriscore
+    {
+        return $this->nutriscore;
+    }
+
+    public function setNutriscore(?Nutriscore $nutriscore): static
+    {
+        $this->nutriscore = $nutriscore;
+
+        return $this;
+    }
+
+    public function getOrigin(): ?Origin
+    {
+        return $this->origin;
+    }
+
+    public function setOrigin(?Origin $origin): static
+    {
+        $this->origin = $origin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, qualityLabel>
+     */
+    public function getQualitylabels(): Collection
+    {
+        return $this->qualitylabels;
+    }
+
+    public function addQualitylabel(QualityLabel $qualitylabel): static
+    {
+        if (!$this->qualitylabels->contains($qualitylabel)) {
+            $this->qualitylabels->add($qualitylabel);
+        }
+
+        return $this;
+    }
+
+    public function removeQualitylabel(QualityLabel $qualitylabel): static
+    {
+        $this->qualitylabels->removeElement($qualitylabel);
 
         return $this;
     }
