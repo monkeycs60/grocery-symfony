@@ -33,6 +33,12 @@ class Category
         $this->products = new ArrayCollection();
     }
 
+    // Nécessaire avec easy admin pour le dashboard dans le dropdown
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
