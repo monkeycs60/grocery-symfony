@@ -21,6 +21,11 @@ class Nutriscore
     #[ORM\OneToMany(mappedBy: 'nutriscore', targetEntity: Product::class, orphanRemoval: true)]
     private Collection $products;
 
+     public function __toString(): string
+    {
+        return $this->score;
+    }
+
     public function __construct()
     {
         $this->products = new ArrayCollection();

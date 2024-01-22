@@ -21,6 +21,11 @@ class QualityLabel
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'qualitylabels')]
     private Collection $products;
 
+     public function __toString(): string
+    {
+        return $this->label;
+    }
+
     public function __construct()
     {
         $this->products = new ArrayCollection();

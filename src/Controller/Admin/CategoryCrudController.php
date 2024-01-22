@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Doctrine\ORM\QueryBuilder;
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -33,8 +34,16 @@ class CategoryCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
-            AssociationField::new('parent')->hideOnIndex(),
+            AssociationField::new('parent')
+            ->formatValue(function ($value, $entity) {
+        return $entity->getParent() ? "Sous-catégorie de " . $entity->getParent()->getName() : 'Catégorie parent';
+    })
+            ->autocomplete()
+            ->setQueryBuilder(function (QueryBuilder $qb) {
+                return $qb->andWhere('entity.parent IS NULL');
+            }),
             AssociationField::new('categories')->onlyOnDetail(),
+        
         ];
     }
 

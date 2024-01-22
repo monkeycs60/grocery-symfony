@@ -21,6 +21,11 @@ class Origin
     #[ORM\OneToMany(mappedBy: 'origin', targetEntity: Product::class, orphanRemoval: true)]
     private Collection $products;
 
+    public function __toString(): string
+    {
+        return $this->country;
+    }
+
     public function __construct()
     {
         $this->products = new ArrayCollection();

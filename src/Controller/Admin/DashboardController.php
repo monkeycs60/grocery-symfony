@@ -3,7 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Nutriscore;
+use App\Entity\Origin;
 use App\Entity\Product;
+use App\Entity\QualityLabel;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -50,5 +53,9 @@ class DashboardController extends AbstractDashboardController
        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
        yield MenuItem::linkToCrud('Produits', 'fas fa-shopping-basket', Product::class);
        yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
+       yield MenuItem::linkToCrud('Origine', 'fas fa-globe-europe', Origin::class);
+       yield MenuItem::linkToCrud('Label qualité', 'fas fa-certificate', QualityLabel::class);
+       yield MenuItem::linkToCrud('Nutriscore', 'fas fa-utensils', Nutriscore::class);
+       
     }
 }
