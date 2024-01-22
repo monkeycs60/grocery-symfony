@@ -31,7 +31,7 @@ class ProductCrudController extends AbstractCrudController
         return $crud
         ->setEntityLabelInSingular('Produit')
         ->setEntityLabelInPlural('Produits')
-        ->setSearchFields(['id', 'title', 'description', 'name', 'price', 'category'])
+        ->setSearchFields(['id', 'title', 'description', 'name', 'price', 'category', 'brand'])
         ->setPageTitle(Crud::PAGE_DETAIL, fn (Product $product) => (string) $product->getName());
     }
 
@@ -42,6 +42,7 @@ class ProductCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('slug'),
             TextField::new('name'),
+            TextField::new('brand'),
             AssociationField::new('category'),
             TextField::new('description'),
             MoneyField::new('price')

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block title %}Accueil - Culinaria
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,9 @@
 		{% include 'home/sections/banner.html.twig' %}
 		{% include 'home/sections/deals.html.twig' %}
 		{% include 'home/sections/categories.html.twig' %}
-		{% include 'home/sections/findProduct.html.twig' %}
+		{% include 'home/sections/findProduct.html.twig'
+			with {'products': products}
+		 %}
 		{# {% include 'home/sections/recommandations.html.twig' %} #}
 	</div>
 {% endblock %}

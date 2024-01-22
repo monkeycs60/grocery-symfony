@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -36,5 +38,13 @@ class ProductStockCrudController extends AbstractCrudController
             IntegerField::new('stockquantity', 'Stock Quantity'),
             // You might want to add more fields that are relevant to stock management
         ];
+    }
+
+     public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->disable(Action::DELETE)
+            ->disable(Action::NEW)
+            ;
     }
 }
