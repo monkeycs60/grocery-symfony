@@ -23,7 +23,7 @@ class HomeController extends AbstractController
         $productsInPage = $paginator->paginate(
             $products,
             $request->query->getInt('page', 1),
-            6
+            8
         );
         return $this->render('home/index.html.twig', [
             'products' => $products,

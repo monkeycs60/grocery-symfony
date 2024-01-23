@@ -1,52 +1,11 @@
 <section class="py-20" id="search-products">
-	<div class="container">
+	<div class="container ">
 		<div class="row">
-			<div class="col-12 col-md-3">
-				<div class="d-block d-sm-inline-block pt-16 pb-20 pb-md-4 ps-12 pe-8 bg-secondary rounded-3" style="height: 500px">
-
-					<div class="mb-6 d-flex flex-column gap-3">
-						<h6 class="d-inline-block mb-5 text-primary-gradient">Rayon</h6>
-						<div class="category-container">
-							<button class="category-btn rounded-5 py-2 px-3">Boissons</button>
-							<div class="sub-categories pl-4" data-category="Boissons">
-								<label><input type="checkbox" class="sub-category-checkbox">
-									Eau</label>
-								<label><input type="checkbox" class="sub-category-checkbox">
-									Jus de fruits</label>
-								<label><input type="checkbox" class="sub-category-checkbox">
-									Boissons gazeuses</label>
-							</div>
-						</div>
-						<div class="category-container">
-							<button class="category-btn rounded-5 py-2 px-3">Gourmet & Charcuterie</button>
-							<div class="sub-categories pl-4" data-category="Gourmet & Charcuterie">
-								<label><input type="checkbox" class="sub-category-checkbox">
-									Fromages</label>
-								<label><input type="checkbox" class="sub-category-checkbox">
-									Charcuteries</label>
-								<label><input type="checkbox" class="sub-category-checkbox">
-									Pâtes fines</label>
-							</div>
-						</div>
-						<div class="category-container">
-							<button class="category-btn rounded-5 py-2 px-3">Fruits et légumes</button>
-							<div class="sub-categories pl-4" data-category="Fruits et légumes">
-								<label><input type="checkbox" class="sub-category-checkbox">
-									Fruits</label>
-								<label><input type="checkbox" class="sub-category-checkbox">
-									Légumes</label>
-								<label><input type="checkbox" class="sub-category-checkbox">
-									Bio</label>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-md-8">
+			<div class="col-12 col-md-12">
 				<div class="container">
 					<div class="row">
 						{% for product in productsInPage %}
-							<div class="col-md-4 mb-4">
+							<div class="col-md-3 mb-4">
 								<div class="card card-custom position-relative">
 									{% if product.discount > 0 %}
 										<div class="card-discount">
@@ -59,7 +18,9 @@
 										{% set image = product.images.first %}
 										<img src="{{ asset('images/products/' ~ image.imageName) }}" style="width: 200px; height: 150px" class="card-img-top object-fit-cover " alt="...">
 									{% else %}
-										<img src="{{ asset('/images/product-placeholder.png') }}" class="card-img-top" alt="...">
+										<img src="{{ asset('/images/product-placeholder.png') }}" style="width:100%; height: 170px" class="card-img-top object-fit-cover" alt="...">
+
+
 									{% endif %}
 									<div class="card-custom-body p-3">
 										<div class="d-flex flex-column ">
@@ -92,19 +53,20 @@
 									</div>
 								</div>
 							</div>
-							{% if loop.index is divisible by(3) %}
-							</p>
-						</div>
-						<div class="row">
-						{% endif %}
-					{% endfor %}
+							{% if loop.index is divisible by(4) and not loop.last %}
+							</div>
+							<div class="row">
+							{% endif %}
+						{% endfor %}
+
+					</div>
 				</div>
-			</div>
-			<nav>
-				{{ knp_pagination_render(productsInPage, 
+				<nav class="mt-10">
+					{{ knp_pagination_render(productsInPage, 
 		'home/pagination.html.twig',
 					) }}
-			</nav>
+				</nav>
+			</div>
 		</div>
 	</div>
-</div></section>
+</section>
