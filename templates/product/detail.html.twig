@@ -6,12 +6,45 @@
 
 {% block body %}
 
-	<section class="product-details py-20">
+	<section class="product-details py-12">
 		<div class="container">
 			<div
-				class="row">
+				class="row justify-content-center">
 				<!-- Section d'images -->
-				<div class="col-md-6">
+				<div class="col-md-4 position-relative">
+					<div class="position-absolute left-0 top-0 bg-info p-3 rounded-pill">
+						<span>
+							<strong>{{ product.stockquantity }}</strong>
+							restants
+						</span>
+					</div>
+					{% if product.nutriscore.score == "A" %}
+						<div class="position-absolute end-0 top-0 pr-6 rounded-3 z-20">
+							<img src="{{asset("images/nutriscore-a.svg")}}" style="width: 100px" alt="">
+						</div>
+					{% elseif product.nutriscore.score == "B" %}
+						<div class="position-absolute end-0 top-0 pr-6 rounded-3 z-20">
+							<img src="{{asset("images/nutriscore-b.svg")}}" style="width: 100px" alt="">
+						</div>
+					{% elseif product.nutriscore.score == "C" %}
+						<div class="position-absolute end-0 top-0 pr-6 rounded-3 z-20">
+							<img src="{{asset("images/nutriscore-c.svg")}}" style="width: 100px" alt="">
+						</div>
+					{% elseif product.nutriscore.score == "D" %}
+						<div class="position-absolute end-0 top-0 pr-6 rounded-3 z-20">
+							<img src="{{asset("images/nutriscore-d.svg")}}" style="width: 100px" alt="">
+						</div>
+					{% elseif product.nutriscore.score == "E" %}
+						<div class="position-absolute end-0 top-0 pr-6 rounded-3 z-20">
+							<img src="{{asset("images/nutriscore-e.svg")}}" style="width: 100px" alt="">
+						</div>
+					{% endif %}
+					<div class="position-absolute left-0 top-0 bg-info p-3 rounded-pill">
+						<span>
+							<strong>{{ product.stockquantity }}</strong>
+							restants
+						</span>
+					</div>
 					{% if product.images|length > 0 %}
 						{% set mainImage = product.images.first %}
 						<img class="img-fluid w-100 mb-3" src="{{ asset('images/products/' ~ mainImage.imageName) }}" alt="{{ product.name }}">
@@ -26,15 +59,13 @@
 				</div>
 
 				<!-- Section de détails du produit -->
-				<div class="col-md-6">
-					<h2>{{ product.name }}</h2>
+				<div class="col-md-4 bg-info p-8 rounded-3">
+					<h4 class="mb-4">{{ product.name }}</h4>
 					<p>{{ product.description }}</p>
 					<p>
 						<strong>Prix :</strong>
 						{{ (product.price / 100) | number_format(2, ',', '') }}€</p>
-					<p>
-						<strong>Stock disponible :</strong>
-						{{ product.stockquantity }}</p>
+
 					{% if product.discount > 0 %}
 						<p>
 							<strong>Réduction :</strong>
@@ -52,18 +83,31 @@
 					<p>
 						<strong>Catégorie :</strong>
 						{{ product.category.name }}</p>
-					<p>
-						<strong>Labels de qualité :</strong>
+					<div>
+						<strong>Labels  :</strong>
 						{% for label in product.qualitylabels %}
-							{{ label.label }}
-							{% if not loop.last %},
+							{% if label.label == 'Bio' %}
+								<img src="{{ asset('/images/bio-label.png') }}" style='width: 25px' alt="Bio">
+							{% elseif label.label == 'Commerce équitable' %}
+								<img src="{{ asset('/images/fairtrade-label.png') }}" style='width: 25px' alt="Commerce équitable">
+							{% elseif label.label == 'Agriculture raisonnée' %}
+								<img src="{{ asset('/images/raison-label.png') }}" style='width: 40px' alt="Agriculture raisonnée">
 							{% endif %}
 						{% endfor %}
-					</p>
-					<p>
-						<strong>Nutriscore :</strong>
-						{{ product.nutriscore.score }}</p>
-					<!-- Ici, ajoutez des options d'achat ou d'autres interactions avec le produit -->
+
+					</div>
+					<div class="d-flex justify-content-center align-items-center gap-4">
+						{# <div>
+							<a class="text-decoration-none" href="">-</a>
+							<a class="text-decoration-none" href="">
+								<span>Quantité</span>
+							</a>
+							<a class="text-decoration-none" href="">+</a>
+						</div> #}
+						<a href="" class="px-3 py-2 bg-secondary text-light text-decoration-none rounded-3">
+							<span>Ajouter au panier</span>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
