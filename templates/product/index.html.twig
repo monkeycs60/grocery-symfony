@@ -1,20 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Tous nos produits
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<section class="py-12" id="search-products">
+		<h5 class="text-center">Tous nos produits</h5>
+		<div class="container pt-8">
+			<div class="row">
+				<div class="col-12 col-md-12">
+					<div class="container">
+						<div class="row">
+							{% for product in products %}
+								<div class="col-md-3 mb-4">
+									<div class="card card-custom position-relative">
+										{% if product.discount > 0 %}
+											<div class="card-discount">
+												<img src="{{ asset('/images/discount.png') }}" class="card-discount-svg" alt="discount">
+												<span class"discount-number">-{{ product.discount }}%</span>
+											</div>
+										{% endif %}
+										<div class="card-price">{{ ((product.price / 100) - ((product.price / 100) * (product.discount / 100))) | number_format(2, ',', '') }}€ /
+											{{product.volume}}</div>
+										{% if product.images|length > 0 %}
+											{% set image = product.images.first %}
+											<img src="{{ asset('images/products/' ~ image.imageName) }}" style="width: 200px; height: 150px" class="card-img-top object-fit-cover " alt="...">
+										{% else %}
+											<img src="{{ asset('/images/product-placeholder.png') }}" style="width:100%; height: 170px" class="card-img-top object-fit-cover" alt="...">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/gregr/Desktop/grocery-symfony/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/gregr/Desktop/grocery-symfony/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+										{% endif %}
+										<div class="card-custom-body p-3">
+											<div class="d-flex flex-column ">
+												<a href="/product/{{product.slug}}" class="h6" style="height: 70px;">{{ product.name }}</a>
+												<p class="small-font-size">{{ product.description }}</p>
+											</div>
+											<div class="d-flex justify-content-between align-items-center w-100 ">
+												<div class="d-flex justify-content-center align-items-center gap-3">
+													<span class="small-font-size text-center">
+														{{ product.origin}}
+													</span>
+													<div>
+														{% for label in product.qualitylabels %}
+															{% if label.label == 'Bio' %}
+																<img src="{{ asset('/images/bio-label.png') }}" style='width: 25px' alt="Bio">
+															{% elseif label.label == 'Commerce équitable' %}
+																<img src="{{ asset('/images/fairtrade-label.png') }}" style='width: 25px' alt="Commerce équitable">
+															{% elseif label.label == 'Agriculture raisonnée' %}
+																<img src="{{ asset('/images/raison-label.png') }}" style='width: 40px' alt="Agriculture raisonnée">
+															{% endif %}
+														{% endfor %}
+													</div>
+
+												</div>
+
+												<a href="#" class="">
+													<img src="{{ asset('/images/cart.svg') }}" class="hover-cart" style="width: 25px" alt="shopping cart">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% if loop.index is divisible by(4) and not loop.last %}
+								</div>
+								<div class="row">
+								{% endif %}
+							{% endfor %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
 {% endblock %}

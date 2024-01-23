@@ -9,7 +9,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
+
+    // Trouve tous les produits
+    #[Route('/product', name: 'app_product')]
+    public function index(ProductRepository $productRepository): Response
+    {
+        $products = $productRepository->findAll();
+
+        return $this->render('product/index.html.twig', [
+            'products' => $products
+        ]);
+    }
   
+    // Trouve un produit par son slug
      #[Route('/product/{slug}', name: 'app_product_detail')]
     public function productDetail(ProductRepository $productRepository, string $slug): Response
 {
