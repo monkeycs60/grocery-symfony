@@ -70,7 +70,7 @@
 				</div>
 				<div class="container mt-4">
 					<div class="row">
-						{% for product in products %}
+						{% for product in productsInPage %}
 							<div class="col-md-4 mb-4">
 								<div class="card card-custom position-relative">
 									<div class="card-price rounded-pill">{{(product.price / 100) | number_format(2, ',', '')}}€</div>
@@ -96,44 +96,8 @@
 						{% endfor %}
 					</div>
 				</div>
-
 				<nav>
-					<ul class="pagination justify-content-center mb-0">
-						<li class="page-item">
-							<a class="page-link bg-transparent border-dark-light" href="#" aria-label="previous">
-								<svg width="7" height="16" viewbox="0 0 7 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M6 10.6666L1.33333 5.99992L6 1.33325" stroke="#84878A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-								</svg>
-							</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link bg-transparent border-dark-light text-muted fw-bold" href="#search-products">1</a>
-
-						</li>
-						<li class="page-item">
-							<a class="page-link bg-transparent border-dark-light text-muted fw-bold" href="#search-products">2</a>
-
-						</li>
-						<li class="page-item">
-							<a class="page-link bg-primary bg-gradient border-dark-light text-dark fw-bold" href="#search-products">3</a>
-
-						</li>
-						<li class="page-item">
-							<a class="page-link bg-transparent border-dark-light text-muted fw-bold" href="#search-products">4</a>
-
-						</li>
-						<li class="page-item">
-							<a class="page-link bg-transparent border-dark-light text-muted fw-bold" href="#search-products">5</a>
-
-						</li>
-						<li class="page-item">
-							<a class="page-link bg-transparent border-dark-light" href="#" aria-label="next">
-								<svg width="7" height="16" viewbox="0 0 7 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M1 1.33341L5.66667 6.00008L1 10.6667" stroke="#84878A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-								</svg>
-							</a>
-						</li>
-					</ul>
+					{{ knp_pagination_render(productsInPage) }}
 				</nav>
 			</div>
 		</div>

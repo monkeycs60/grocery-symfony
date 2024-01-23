@@ -72,3 +72,33 @@
     padding: 2px 4px;
     text-align: center;
 }
+
+.pagination {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.pagination .current {
+    color: #007bff;
+}
+
+.pagination .page {
+    color: #007bff;
+}
+
+.pagination .next {
+    color: #007bff;
+}
+
+.pagination .last {
+    color: #007bff;
+}
+
+.pagination .prev {
+    color: #007bff;
+}
+
+.pagination .first {
+    color: #007bff;
+}
