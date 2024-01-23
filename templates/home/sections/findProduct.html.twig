@@ -1,7 +1,7 @@
 <section class="py-20" id="search-products">
 	<div class="container">
 		<div class="row">
-			<div class="col-12 col-md-4">
+			<div class="col-12 col-md-3">
 				<div class="d-block d-sm-inline-block pt-16 pb-20 pb-md-4 ps-12 pe-8 bg-secondary rounded-3" style="height: 500px">
 
 					<div class="mb-6 d-flex flex-column gap-3">
@@ -43,37 +43,12 @@
 				</div>
 			</div>
 			<div class="col-12 col-md-8">
-				<div class="d-flex mb-8">
-					<div class="position-relative me-4 border-light-dark">
-						<span class="position-absolute top-0 end-0 me-4 mt-3" id="chevron-icon-sortby">
-							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-						</span>
-						<select class="position-relative form-control w-full ps-6 pe-10 py-4 bg-transparent fw-medium" name="" id="select-dropdown-sortby">
-							<option value="" disabled selected>Trier par</option>
-							<option value="1">Prix le plus bas</option>
-							<option value="2">Prix le plus haut</option>
-						</select>
-					</div>
-					<div class="position-relative me-4 border-light-dark">
-						<span class="position-absolute top-0 end-0 me-4 mt-3" id="chevron-icon-origin">
-							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
-						</span>
-						<select class="position-relative form-control w-full ps-6 pe-10 py-4 bg-transparent fw-medium" name="" id="select-dropdown-origin">
-
-							<option value="" disabled selected>Origine</option>
-							<option value="1">France</option>
-							<option value="2">Italie</option>
-							<option value="3">Espagne</option>
-							<option value="4">Reste du monde</option>
-						</select>
-					</div>
-				</div>
-				<div class="container mt-4">
+				<div class="container">
 					<div class="row">
 						{% for product in productsInPage %}
 							<div class="col-md-4 mb-4">
 								<div class="card card-custom position-relative">
-									<div class="card-price rounded-pill">{{(product.price / 100) | number_format(2, ',', '')}}€</div>
+									<div class="card-price">{{(product.price / 100) | number_format(2, ',', '')}}€</div>
 									{% if product.images|length > 0 %}
 										{% set image = product.images.first %}
 										<img src="{{ asset('images/products/' ~ image.imageName) }}" style="width: 200px; height: 150px" class="card-img-top object-fit-cover " alt="...">
@@ -81,25 +56,49 @@
 										<img src="{{ asset('/images/product-placeholder.png') }}" class="card-img-top" alt="...">
 									{% endif %}
 									<div class="card-custom-body p-3">
-										<div class="">
-											<h5 class="h6">{{ product.name }}</h5>
+										<div class="d-flex flex-column ">
+											<a href="/product/{{product.slug}}" class="h6" style="height: 70px;">{{ product.name }}</a>
 											<p class="small-font-size">{{ product.description }}</p>
 										</div>
-										<a href="#" class="">Acheter</a>
+										<div class="d-flex justify-content-between align-items-center w-100 ">
+											<div class="d-flex justify-content-center align-items-center gap-3">
+												<p class="small-font-size text-center">
+													{{ product.origin}}
+												</p>
+												<div>
+													{% for label in product.qualitylabels %}
+														{% if label.label == 'Bio' %}
+															<img src="{{ asset('/images/bio-label.png') }}" style='width: 25px' alt="Bio">
+														{% elseif label.label == 'Commerce équitable' %}
+															<img src="{{ asset('/images/fairtrade-label.png') }}" style='width: 25px' alt="Commerce équitable">
+														{% elseif label.label == 'Agriculture raisonnée' %}
+															<img src="{{ asset('/images/raison-label.png') }}" style='width: 40px' alt="Agriculture raisonnée">
+														{% endif %}
+													{% endfor %}
+												</div>
+
+											</div>
+
+											<a href="#" class="">
+												<img src="{{ asset('/images/cart.svg') }}" class="hover-cart" style="width: 25px" alt="shopping cart">
+											</a>
+										</div>
 									</div>
 								</div>
 							</div>
 							{% if loop.index is divisible by(3) %}
-							</div>
-							<div class="row">
-							{% endif %}
-						{% endfor %}
-					</div>
+							</p>
+						</div>
+						<div class="row">
+						{% endif %}
+					{% endfor %}
 				</div>
-				<nav>
-					{{ knp_pagination_render(productsInPage) }}
-				</nav>
 			</div>
+			<nav>
+				{{ knp_pagination_render(productsInPage, 
+		'home/pagination.html.twig',
+					) }}
+			</nav>
 		</div>
 	</div>
-</section>
+</div></section>

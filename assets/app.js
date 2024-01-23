@@ -1,4 +1,5 @@
 import './theme.js';
+import './pagination.js';
 require('bootstrap');
 /*
  * Welcome to your app's main JavaScript file!

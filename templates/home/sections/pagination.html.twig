@@ -1,0 +1,15 @@
+{% extends '@KnpPaginator/Pagination/sliding.html.twig' %}
+
+{% block pagination %}
+	{% if pagination.pagesCount > 1 %}
+		<nav>
+			<ul class="pagination">
+				{% for page in 1..pagination.pagesCount %}
+					<li class="page-item{{ pagination.currentPage == page ? ' active' : '' }}">
+						<a class="page-link bg-bg-secondary" href="{{ path('app_home', {'page': page}) }}#search-products">{{ page }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</nav>
+	{% endif %}
+{% endblock %}

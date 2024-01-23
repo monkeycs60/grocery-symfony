@@ -7,7 +7,9 @@
 
 	<div class='col-lg-10 mx-auto justify-content-center d-flex flex-column align-items-center '>
 		{% include 'home/sections/banner.html.twig' %}
-		{% include 'home/sections/deals.html.twig' %}
+		{% include 'home/sections/deals.html.twig'
+			with {'topDiscountedProducts': topDiscountedProducts}
+		 %}
 		{% include 'home/sections/categories.html.twig' %}
 		{% include 'home/sections/findProduct.html.twig'
 			with {'products': products}

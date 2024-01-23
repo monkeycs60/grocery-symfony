@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ product.name }}
+{% endblock %}
+
+{% block body %}
+
+	<section class="product-details py-20">
+		<div class="container">
+			<div
+				class="row">
+				<!-- Section d'images -->
+				<div class="col-md-6">
+					{% if product.images|length > 0 %}
+						{% set mainImage = product.images.first %}
+						<img class="img-fluid w-100 mb-3" src="{{ asset('images/products/' ~ mainImage.imageName) }}" alt="{{ product.name }}">
+						<div class="small-images d-flex">
+							{% for image in product.images %}
+								<img class="img-fluid mr-2" src="{{ asset('images/products/' ~ image.imageName) }}" alt="{{ product.name }}" style="width: 100px; height: 100px;">
+							{% endfor %}
+						</div>
+					{% else %}
+						<img class="img-fluid w-100" src="{{ asset('/images/product-placeholder.png') }}" alt="{{ product.name }}">
+					{% endif %}
+				</div>
+
+				<!-- Section de détails du produit -->
+				<div class="col-md-6">
+					<h2>{{ product.name }}</h2>
+					<p>{{ product.description }}</p>
+					<p>
+						<strong>Prix :</strong>
+						{{ (product.price / 100) | number_format(2, ',', '') }}€</p>
+					<p>
+						<strong>Stock disponible :</strong>
+						{{ product.stockquantity }}</p>
+					{% if product.discount > 0 %}
+						<p>
+							<strong>Réduction :</strong>
+							{{ product.discount }}%</p>
+					{% endif %}
+					<p>
+						<strong>Volume :</strong>
+						{{ product.volume }}</p>
+					<p>
+						<strong>Origine :</strong>
+						{{ product.name }}</p>
+					<p>
+						<strong>Marque :</strong>
+						{{ product.brand }}</p>
+					<p>
+						<strong>Catégorie :</strong>
+						{{ product.category.name }}</p>
+					<p>
+						<strong>Labels de qualité :</strong>
+						{% for label in product.qualitylabels %}
+							{{ label.label }}
+							{% if not loop.last %},
+							{% endif %}
+						{% endfor %}
+					</p>
+					<p>
+						<strong>Nutriscore :</strong>
+						{{ product.nutriscore.score }}</p>
+					<!-- Ici, ajoutez des options d'achat ou d'autres interactions avec le produit -->
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

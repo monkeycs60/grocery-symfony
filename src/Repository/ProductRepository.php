@@ -21,6 +21,20 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+       /**
+     * Récupérer les 4 produits avec le plus grand discount.
+     *
+     * @return Product[]
+     */
+    public function findTopDiscountedProducts(int $limit = 4)
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.discount', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */

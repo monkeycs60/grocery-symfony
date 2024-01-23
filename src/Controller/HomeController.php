@@ -15,6 +15,10 @@ class HomeController extends AbstractController
     public function index(ProductRepository $productRepository, Request $request, PaginatorInterface $paginator ): Response
     {
         $products = $productRepository->findAll();
+        $topDiscountedProducts = $productRepository->findTopDiscountedProducts();
+
+
+        // dd($products);
         
         $productsInPage = $paginator->paginate(
             $products,
@@ -23,7 +27,22 @@ class HomeController extends AbstractController
         );
         return $this->render('home/index.html.twig', [
             'products' => $products,
-            'productsInPage' => $productsInPage
+            'topDiscountedProducts' => $topDiscountedProducts,
+            'productsInPage' => $productsInPage,
         ]);
     }
+
+    #[Route('/product/{slug}', name: 'app_product_detail')]
+    public function productDetail(ProductRepository $productRepository, string $slug): Response
+{
+    $product = $productRepository->findOneBy(['slug' => $slug]);
+
+    if (!$product) {
+        throw $this->createNotFoundException('Le produit demandé n\'existe pas');
+    }
+
+    return $this->render('product/detail.html.twig', [
+        'product' => $product
+    ]);
+}
 }

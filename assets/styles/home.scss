@@ -47,11 +47,12 @@
 
 // card
 .card-custom {
-    height: 380px;
+    height: 420px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    border-radius: 10px;
 }
 
 .card-custom-body {
@@ -71,34 +72,12 @@
     width: 80px;
     padding: 2px 4px;
     text-align: center;
+    border-radius: 0px 10px 0px 0px;
 }
 
 .pagination {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: white;
-}
-
-.pagination .current {
-    color: #007bff;
-}
-
-.pagination .page {
-    color: #007bff;
-}
-
-.pagination .next {
-    color: #007bff;
-}
-
-.pagination .last {
-    color: #007bff;
-}
-
-.pagination .prev {
-    color: #007bff;
-}
-
-.pagination .first {
-    color: #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
