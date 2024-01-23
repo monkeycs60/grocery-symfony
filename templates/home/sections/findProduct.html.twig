@@ -48,6 +48,12 @@
 						{% for product in productsInPage %}
 							<div class="col-md-4 mb-4">
 								<div class="card card-custom position-relative">
+									{% if product.discount > 0 %}
+										<div class="card-discount">
+											<img src="{{ asset('/images/discount.png') }}" class="card-discount-svg" alt="discount">
+											<span class"discount-number">-{{ product.discount }}%</span>
+										</div>
+									{% endif %}
 									<div class="card-price">{{(product.price / 100) | number_format(2, ',', '')}}€</div>
 									{% if product.images|length > 0 %}
 										{% set image = product.images.first %}
