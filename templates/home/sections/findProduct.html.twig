@@ -13,7 +13,8 @@
 											<span class"discount-number">-{{ product.discount }}%</span>
 										</div>
 									{% endif %}
-									<div class="card-price">{{(product.price / 100) | number_format(2, ',', '')}}€</div>
+									<div class="card-price">{{ ((product.price / 100) - ((product.price / 100) * (product.discount / 100))) | number_format(2, ',', '') }}€ /
+										{{product.volume}}</div>
 									{% if product.images|length > 0 %}
 										{% set image = product.images.first %}
 										<img src="{{ asset('images/products/' ~ image.imageName) }}" style="width: 200px; height: 150px" class="card-img-top object-fit-cover " alt="...">

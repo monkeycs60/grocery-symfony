@@ -12,12 +12,13 @@
 				<div class="card card-custom-deals position-relative">
 					<div class="card-price d-flex flex-column">
 						<span class"h6">
-							{{ ((product.price / 100) - ((product.price / 100) * (product.discount / 100))) | number_format(2, ',', '') }}€
+							{{ ((product.price / 100) - ((product.price / 100) * (product.discount / 100))) | number_format(2, ',', '') }}€ /
+							{{product.volume}}
+
 
 						</span>
 						<span>
-							<del>{{(product.price / 100) | number_format(2, ',', '')}}€ /
-								{{product.volume}}
+							<del>{{(product.price / 100) | number_format(2, ',', '')}}€
 							</del>
 						</span>
 					</div>
