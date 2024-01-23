@@ -55,6 +55,16 @@
     border-radius: 10px;
 }
 
+.card-custom-deals {
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px dashed #FB8B24;
+}
+
 .card-custom-body {
     height: 55%;
     display: flex;
@@ -69,10 +79,38 @@
     right: 0;
     background-color: #FB8B24;
     color: #fff;
-    width: 80px;
+    width: auto;
     padding: 2px 4px;
     text-align: center;
     border-radius: 0px 10px 0px 0px;
+}
+
+.card-discount {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    color: black;
+    width: 80px;
+    padding: 6px 4px;
+    text-align: center;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #52AA5E;
+    font-weight: bolder;
+}
+
+.discount-number {
+    font-weight: 900;
+}
+
+.card-discount-svg {
+    width: 30px;
+    height: 30px;
+
 }
 
 .pagination {
