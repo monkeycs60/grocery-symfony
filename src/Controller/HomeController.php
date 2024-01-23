@@ -32,17 +32,5 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{slug}', name: 'app_product_detail')]
-    public function productDetail(ProductRepository $productRepository, string $slug): Response
-{
-    $product = $productRepository->findOneBy(['slug' => $slug]);
-
-    if (!$product) {
-        throw $this->createNotFoundException('Le produit demandé n\'existe pas');
-    }
-
-    return $this->render('product/detail.html.twig', [
-        'product' => $product
-    ]);
-}
+   
 }
