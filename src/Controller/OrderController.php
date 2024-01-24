@@ -108,10 +108,8 @@ class OrderController extends AbstractController
         // On affiche un message de confirmation
         $this->addFlash('success', 'Votre commande a bien été enregistrée, il vous faut maintenant choisir un mode de livraison');
 
-        return $this->render('order/checkout.html.twig', [
-            'cartDetails' => $cartDetails,
-            'order' => $order
-        ]);
+        // redirection vers la page de choix de livraison
+        return $this->redirectToRoute('app_order_delivery');
     }
 
     // Validation des infos après passage de la commande
