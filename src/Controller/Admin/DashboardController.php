@@ -59,6 +59,7 @@ class DashboardController extends AbstractDashboardController
        yield MenuItem::linkToCrud('Origine', 'fas fa-globe-europe', Origin::class);
        yield MenuItem::linkToCrud('Label qualité', 'fas fa-certificate', QualityLabel::class);
        yield MenuItem::linkToCrud('Nutriscore', 'fas fa-utensils', Nutriscore::class);
+       yield MenuItem::linkToUrl('Retour au site', 'fas fa-home', '/');   
        yield MenuItem::linkToLogout('Se déconnecter', 'fa-solid fa-arrow-right-from-bracket');
        
     }
