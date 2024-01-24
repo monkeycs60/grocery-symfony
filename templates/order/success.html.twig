@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<section class="py-4">
+		<div class="container">
+			<h2>Commande réussie !</h2>
+			<p>Merci pour votre commande,
+				{{ app.user.username }}.</p>
+
+			{% set lastOrder = app.user.orders | last %}
+
+			{% if lastOrder %}
+				<h3>Détails de la commande</h3>
+				<ul>
+					<li>Numéro de commande :
+						{{ lastOrder.reference }}</li>
+					<li>Date de la commande :
+						{{ lastOrder.createdAt|date('d/m/Y') }}</li>
+					<li>Statut :
+						{{ lastOrder.status }}</li>
+					<li>Total de la commande :
+						{{ lastOrder.total }}
+						€</li>
+					{% if lastOrder.deliveryInfo %}
+						<li>Adresse de livraison :
+							{{ lastOrder.deliveryInfo.address }}</li>
+						<li>Méthode de livraison :
+							{{ lastOrder.deliveryInfo.deliveryMethod }}</li>
+					{% endif %}
+				</ul>
+				<a href="/" class="btn btn-primary">Retour à l'accueil</a>
+			{% else %}
+				<p>Aucune commande trouvée.</p>
+			{% endif %}
+		</div>
+	</section>
+{% endblock %}

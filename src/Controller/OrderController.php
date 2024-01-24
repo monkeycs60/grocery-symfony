@@ -154,4 +154,13 @@ class OrderController extends AbstractController
         'form' => $form->createView(),
     ]);
 }
+
+    // route pour la page de succès de commande
+    #[Route('/order/success', name: 'app_order_success')]
+    public function success(): Response
+    {
+        return $this->render('order/success.html.twig');
+
+    }
+
 }
