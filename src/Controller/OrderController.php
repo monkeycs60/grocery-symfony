@@ -2,22 +2,29 @@
 
 namespace App\Controller;
 
+use App\Entity\DeliveryInfo;
 use App\Entity\Order;
 use App\Entity\OrderDetail;
+use App\Form\DeliveryInfoType;
 use App\Repository\ProductRepository;
+use App\Repository\UserRepository;
 use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class OrderController extends AbstractController
 {
     private $cartService;
+    private $userRepository;
 
-    public function __construct(CartService $cartService)
+
+    public function __construct(CartService $cartService, UserRepository $userRepository)
     {
         $this->cartService = $cartService;
+        $this->userRepository = $userRepository;
     }
 
     #[Route('/order', name: 'app_order')]
@@ -28,6 +35,7 @@ class OrderController extends AbstractController
         ]);
     }
 
+    // Pour passer une commande
     #[Route('/order/checkout', name: 'app_order_checkout')]
     public function checkout(ProductRepository $productRepository, EntityManagerInterface $em): Response
     {
@@ -90,11 +98,11 @@ class OrderController extends AbstractController
         // On enregistre la commande en BDD
         $em->persist($order);
 
-        // On vide le panier
-        $this->cartService->emptyCart();
-
         // On enregistre la commande en BDD
         $em->flush();
+
+        // On vide le panier
+        $this->cartService->emptyCart();
 
         // On affiche un message de confirmation
         $this->addFlash('success', 'Votre commande a bien été enregistrée, il vous faut maintenant choisir un mode de livraison');
@@ -104,4 +112,45 @@ class OrderController extends AbstractController
             'order' => $order
         ]);
     }
+
+    // Validation des infos après passage de la commande
+    #[Route('/order/delivery', name: 'app_order_delivery')]
+public function delivery(Request $request, EntityManagerInterface $em): Response
+{
+    $user = $this->getUser(); // Récupérer l'utilisateur actuel
+    $deliveryInfo = new DeliveryInfo();
+    dd($user);
+    // Pré-remplir le formulaire avec les informations de l'utilisateur si disponibles
+    if ($user) {
+        $deliveryInfo->setDeliveryName($user->get_current_user());
+       
+    }
+
+    $form = $this->createForm(DeliveryInfoType::class, $deliveryInfo);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Récupérer la commande actuelle de l'utilisateur
+        $order =  $em->getRepository(Order::class)->findOneBy([
+            'user' => $user,
+            'status' => 'En attente du choix de livraison'
+        ]);
+         // Vous devez obtenir la dernière commande non validée de l'utilisateur
+
+        // Mettre à jour la commande avec les informations de livraison
+        $order->setDeliveryInfo($deliveryInfo);
+        $order->setStatus('Validé');
+
+        $em->persist($deliveryInfo);
+        $em->persist($order);
+        $em->flush();
+
+        $this->addFlash('success', 'Votre commande a été validée avec succès.');
+        return $this->redirectToRoute('app_order_success'); // Rediriger vers une page de succès de commande
+    }
+
+    return $this->render('order/delivery.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
 }

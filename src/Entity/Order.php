@@ -39,6 +39,9 @@ class Order
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $reference = null;
 
+    #[ORM\OneToOne(inversedBy: 'orderInfo', cascade: ['persist', 'remove'])]
+    private ?DeliveryInfo $deliveryInfo = null;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -147,6 +150,18 @@ class Order
     public function setReference(?string $reference): static
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getDeliveryInfo(): ?DeliveryInfo
+    {
+        return $this->deliveryInfo;
+    }
+
+    public function setDeliveryInfo(?DeliveryInfo $deliveryInfo): static
+    {
+        $this->deliveryInfo = $deliveryInfo;
 
         return $this;
     }
