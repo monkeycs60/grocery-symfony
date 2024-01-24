@@ -59,6 +59,16 @@ class OrderController extends AbstractController
         // On récupère l'utilisateur connecté
         $user = $this->getUser();
 
+        $pendingOrder = $em->getRepository(Order::class)->findOneBy([
+        'user' => $user,
+        'status' => 'En attente du choix de livraison'
+    ]);
+
+    if ($pendingOrder) {
+        $this->addFlash('error', 'Vous avez déjà une commande en attente.');
+        return $this->redirectToRoute('app_order');
+    }
+
         // On ajoute l'utilisateur à la commande
         $order->setUser($user);
 
@@ -75,8 +85,9 @@ class OrderController extends AbstractController
             $product = $item['product']; // Obtenir le produit
             $quantity = $item['quantity']; // Obtenir la quantit
 
-            // $product = $productRepository->find($productId);
-            // dd($product);
+             // Diminuez le stock du produit
+            $newStock = $product->getStockquantity() - $quantity;
+            $product->setStockquantity($newStock);
 
             $price = (($product->getPrice() / 100) - (($product->getPrice() / 100) * ($product->getDiscount() / 100)));
             $orderDetail->setProduct($product);
@@ -85,6 +96,9 @@ class OrderController extends AbstractController
             $orderDetail->setTotal($price * $quantity);
             $orderDetail->setQuantity($quantity);
             $order->addOrderDetail($orderDetail);
+
+            // On enregistre le stock actualisé du produit de la commande en BDD
+            $em->persist($product);
         }
 
         // On calcule le total de la commande
@@ -125,10 +139,12 @@ class OrderController extends AbstractController
     $deliveryInfo = new DeliveryInfo();
     
 
-    $form = $this->createForm(DeliveryInfoType::class, $deliveryInfo);
+    $form = $this->createForm(DeliveryInfoType::class, $deliveryInfo, [
+        'user' => $user, // Passer l'utilisateur connecté
+    ]);
     $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
+    if ($form->isSubmitted() && $form->isValid()) {      
         // Récupérer la commande actuelle de l'utilisateur
         $order =  $em->getRepository(Order::class)->findOneBy([
             'user' => $user,

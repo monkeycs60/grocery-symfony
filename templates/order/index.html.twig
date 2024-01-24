@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+{% block title %}Mes Commandes
+{% endblock %}
 
 {% block body %}
 	<section class="py-20">
@@ -28,7 +30,7 @@
 				<p>Aucune commande en attente.</p>
 			{% endif %}
 
-			<h5 class="my-6">Commandes Validées</h5>
+			<h5 class="mt-8 mb-6">Commandes Validées</h5>
 			{% set hasValidatedOrders = false %}
 			{% for order in app.user.orders %}
 				{% if order.status == 'Validé' %}

@@ -19,12 +19,15 @@ class DeliveryInfoType extends AbstractType
     {
         $builder
             ->add('address', null, [
+                 'required' => true,
                 'label' => 'Adresse de livraison',
             ])
             ->add('deliveryName', null, [
+                 'required' => true,
                 'label' => 'Nom complet pour la livraison',
             ])
               ->add('deliveryMethod', ChoiceType::class, [
+            'required' => true,
             'choices' => [
                 'En magasin' => 'Récupérer en magasin',
                 'Livraison à domicile' => 'Livraison à domicile',
@@ -35,10 +38,14 @@ class DeliveryInfoType extends AbstractType
             ->add('orderInfo', EntityType::class, [
                 'class' => Order::class,
                 // Enlève les commandes déjà validées
-                  'query_builder' => function (OrderRepository $er) {
+                  'query_builder' => function (OrderRepository $er) use ($options) {
                 return $er->createQueryBuilder('o')
-                    ->where('o.status != :status')
-                    ->setParameter('status', 'Validé');
+            ->where('o.status != :status')
+            ->andWhere('o.user = :user') // Ajoutez cette ligne
+            ->setParameters([
+                'status' => 'Validé',
+                'user' => $options['user'] // Utilisez l'utilisateur passé en option
+            ]);
             },
 'choice_label' => 'id',
 'label' => 'Commande n° (utile si vous avez plusieurs commandes en attente de validation)',
@@ -54,6 +61,7 @@ class DeliveryInfoType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => DeliveryInfo::class,
+             'user' => null, 
         ]);
     }
 }

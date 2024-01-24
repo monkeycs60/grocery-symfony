@@ -39,8 +39,10 @@
 			</div>
 		</div>
 
-		{# Reste du formulaire #}
-		{{ form_row(form.orderInfo) }}
+		<div style="display: none;">
+			{{ form_row(form.orderInfo) }}
+		</div>
+
 		<button type="submit" class="btn btn-primary">Confirmer la commande</button>
 
 		{{ form_end(form) }}
