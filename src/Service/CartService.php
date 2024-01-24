@@ -3,62 +3,72 @@ namespace App\Service;
 
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CartService
 {
-    private $session;
+    private $requestStack;
     private $productRepository;
 
-    public function __construct(RequestStack $requestStack, ProductRepository $productRepository)
+    public function __construct( ProductRepository $productRepository, RequestStack $requestStack)
     {
-        $this->session = $requestStack->getCurrentRequest()->getSession();
+        $this->requestStack = $requestStack;
         $this->productRepository = $productRepository;
+    }
+
+    private function getSession(): SessionInterface
+    {
+        return $this->requestStack->getSession();
     }
 
     public function addProduct(int $productId)
     {
-        $cart = $this->session->get('cart', []);
+        $session = $this->getSession();
+        $cart = $session->get('cart', []);
         if (isset($cart[$productId])) {
             $cart[$productId]++;
         } else {
             $cart[$productId] = 1;
         }
-        $this->session->set('cart', $cart);
+        $session->set('cart', $cart);
     }
 
     public function removeProduct(int $productId)
     {
-        $cart = $this->session->get('cart', []);
+        $session = $this->getSession();
+        $cart = $this->$session->get('cart', []);
         if (isset($cart[$productId])) {
             unset($cart[$productId]);
         }
-        $this->session->set('cart', $cart);
+        $session->set('cart', $cart);
     }
 
     public function increaseQuantity(int $productId)
     {
-        $cart = $this->session->get('cart', []);
+        $session = $this->getSession();
+        $cart = $session->get('cart', []);
         if (isset($cart[$productId])) {
             $cart[$productId]++;
         }
-        $this->session->set('cart', $cart);
+       $session->set('cart', $cart);
     }
 
     public function decreaseQuantity(int $productId)
     {
-        $cart = $this->session->get('cart', []);
+        $session = $this->getSession();
+        $cart = $session->get('cart', []);
         if (isset($cart[$productId]) && $cart[$productId] > 1) {
             $cart[$productId]--;
         } else {
             unset($cart[$productId]);
         }
-        $this->session->set('cart', $cart);
+        $session->set('cart', $cart);
     }
 
     public function getTotalQuantity(): int
     {
-        $cart = $this->session->get('cart', []);
+        $session = $this->getSession();
+        $cart = $session->get('cart', []);
         $totalQuantity = 0;
         foreach ($cart as $quantity) {
             $totalQuantity += $quantity;
@@ -68,7 +78,8 @@ class CartService
 
     public function getCartDetails()
     {
-        $cart = $this->session->get('cart', []);
+        $session = $this->getSession();
+        $cart = $session->get('cart', []);
         $data = [];
         $totalPrice = 0;
         $totalQuantity = 0;
