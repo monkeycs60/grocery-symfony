@@ -56,6 +56,16 @@ class CartService
         $this->session->set('cart', $cart);
     }
 
+    public function getTotalQuantity(): int
+    {
+        $cart = $this->session->get('cart', []);
+        $totalQuantity = 0;
+        foreach ($cart as $quantity) {
+            $totalQuantity += $quantity;
+        }
+        return $totalQuantity;
+    }
+
     public function getCartDetails()
     {
         $cart = $this->session->get('cart', []);
