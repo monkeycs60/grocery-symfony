@@ -20,7 +20,8 @@ class CartController extends AbstractController
         // $session->remove('cart');
 
         $data = [];
-        $total = 0;
+        $totalPrice = 0;
+        $totalQuantity = 0;
 
         foreach($cart as $id => $quantity) {
             $product = $productRepository
@@ -31,16 +32,15 @@ class CartController extends AbstractController
                 'quantity' => $quantity
             ];
 
-            $total += $product->getPrice() * $quantity;
+            $totalPrice += (($product->getPrice() / 100 ) - (($product->getPrice() / 100) * ($product->getDiscount() / 100))) * $quantity;
+            $totalQuantity += $quantity;
         }
-
-        // dd($data, $total);
-
 
 
         return $this->render('cart/index.html.twig', [
             'data' => $data,
-            'total' => $total,
+            'totalPrice' => $totalPrice,
+            'totalQuantity' => $totalQuantity,
             'cart' => $cart
            
         ]);
@@ -62,6 +62,63 @@ class CartController extends AbstractController
         } else {
             // On incrémente la quantité
             $cart[$id]++;
+        }
+
+        // On enregistre le panier mis à jour
+        $session->set('cart', $cart);
+
+        return $this->redirectToRoute('app_cart');
+    }
+
+        // On incrémente de 1 la quantité du produit
+    #[Route('/cart/increase/{id}', name: 'app_cart_increase')]
+    public function increase(Product $product, SessionInterface $session): Response
+    {
+        $id = $product->getId();
+        $cart = $session->get('cart', []);
+
+        if(isset($cart[$id])) {
+            $cart[$id]++;
+        } else {
+            $cart[$id] = 1;
+        }
+
+        $session->set('cart', $cart);
+
+        return $this->redirectToRoute('app_cart');
+    }
+
+    // On décrémente de 1 la quantité du produit
+    #[Route('/cart/decrease/{id}', name: 'app_cart_decrease')]
+    public function decrease(Product $product, SessionInterface $session): Response
+    {
+        $id = $product->getId();
+        $cart = $session->get('cart', []);
+
+        if(isset($cart[$id]) && $cart[$id] > 1) {
+            $cart[$id]--;
+        } else {
+            unset($cart[$id]);
+        }
+
+        $session->set('cart', $cart);
+
+        return $this->redirectToRoute('app_cart');
+    }
+
+    #[Route('/cart/remove/{id}', name: 'app_cart_remove')]
+    public function remove(Product $product, SessionInterface $session): Response
+    {
+        // On récupère l'id du produit
+        $id = $product->getId();
+
+        // On récupère le panier actuel
+        $cart = $session->get('cart', []);
+
+        // Si le produit est déjà dans le panier
+        if(!empty($cart[$id])) {
+            // On supprime le produit du panier
+            unset($cart[$id]);
         }
 
         // On enregistre le panier mis à jour
