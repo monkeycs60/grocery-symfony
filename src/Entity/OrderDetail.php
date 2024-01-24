@@ -29,6 +29,9 @@ class OrderDetail
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $total = null;
 
+    #[ORM\Column]
+    private ?int $discount = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class OrderDetail
     public function setTotal(string $total): static
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?int
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(int $discount): static
+    {
+        $this->discount = $discount;
 
         return $this;
     }

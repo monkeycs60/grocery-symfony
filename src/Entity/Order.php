@@ -33,7 +33,7 @@ class Order
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $total = null;
 
-    #[ORM\OneToMany(mappedBy: 'orders', targetEntity: OrderDetail::class)]
+    #[ORM\OneToMany(mappedBy: 'orders', targetEntity: OrderDetail::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $orderDetails;
 
     #[ORM\Column(length: 255, nullable: true)]

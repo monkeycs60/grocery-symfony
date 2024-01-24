@@ -1,6 +1,8 @@
 <?php
 namespace App\Service;
 
+use App\Entity\Order;
+use App\Entity\OrderDetail;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -36,7 +38,7 @@ class CartService
     public function removeProduct(int $productId)
     {
         $session = $this->getSession();
-        $cart = $this->$session->get('cart', []);
+        $cart = $session->get('cart', []);
         if (isset($cart[$productId])) {
             unset($cart[$productId]);
         }
@@ -63,6 +65,12 @@ class CartService
             unset($cart[$productId]);
         }
         $session->set('cart', $cart);
+    }
+
+    public function emptyCart()
+    {
+        $session = $this->getSession();
+        $session->remove('cart');
     }
 
     public function getTotalQuantity(): int
@@ -102,4 +110,5 @@ class CartService
             'totalQuantity' => $totalQuantity
         ];
     }
+
 }
