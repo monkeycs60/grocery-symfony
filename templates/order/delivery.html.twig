@@ -1,9 +1,50 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h2>Informations de Livraison</h2>
-	{{ form_start(form) }}
-	{{ form_widget(form) }}
-	<button type="submit" class="btn btn-primary">Confirmer la commande</button>
-	{{ form_end(form) }}
+	<section class="py-20">
+		<h2>Informations de Livraison</h2>
+		{{ form_start(form) }}
+
+		{{ form_row(form.address, {
+    'attr': {
+        'value': app.user.address ? app.user.address : ''
+    }
+}) }}
+
+		{{ form_row(form.deliveryName, {
+    'attr': {
+        'value': app.user.username ? app.user.username : ''
+    }
+}) }}
+
+		{# Utiliser les widgets de Symfony mais les cacher avec du CSS #}
+		<div style="display: none;">
+			{{ form_row(form.deliveryMethod) }}
+		</div>
+
+		{# Créer les boutons radio personnalisés qui sont liés aux widgets de Symfony #}
+		<div class="py-3">
+			<label class="fw-bold mb-2">Mode de livraison</label>
+			<div class="form-check">
+				<label>
+					<input type="radio" id="deliveryMethod_store" name="{{ form.deliveryMethod.vars.full_name }}" value="Récupérer en magasin" {{ app.user.deliveryPreference == 'en magasin' ? 'checked' : '' }}>
+					Récupérer en magasin
+				</label>
+			</div>
+			<div class="form-check">
+				<label>
+					<input type="radio" id="deliveryMethod_home" name="{{ form.deliveryMethod.vars.full_name }}" value="Livraison à domicile" {{ app.user.deliveryPreference == 'livraison à domicile' ? 'checked' : '' }}>
+					Livraison à domicile
+				</label>
+			</div>
+		</div>
+
+		{# Reste du formulaire #}
+		{{ form_row(form.orderInfo) }}
+		<button type="submit" class="btn btn-primary">Confirmer la commande</button>
+
+		{{ form_end(form) }}
+
+	</section>
+
 {% endblock %}

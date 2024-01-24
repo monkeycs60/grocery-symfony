@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\DeliveryInfo;
 use App\Entity\Order;
 use App\Entity\OrderDetail;
+use App\Entity\User;
 use App\Form\DeliveryInfoType;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
@@ -115,16 +116,16 @@ class OrderController extends AbstractController
 
     // Validation des infos après passage de la commande
     #[Route('/order/delivery', name: 'app_order_delivery')]
-public function delivery(Request $request, EntityManagerInterface $em): Response
+    public function delivery(Request $request, EntityManagerInterface $em): Response
 {
     $user = $this->getUser(); // Récupérer l'utilisateur actuel
-    $deliveryInfo = new DeliveryInfo();
-    dd($user);
-    // Pré-remplir le formulaire avec les informations de l'utilisateur si disponibles
-    if ($user) {
-        $deliveryInfo->setDeliveryName($user->get_current_user());
-       
+   
+    if (!$user) {
+        $this->addFlash('warning', 'Vous devez être connecté pour passer une commande');
+        return $this->redirectToRoute('app_login');
     }
+    $deliveryInfo = new DeliveryInfo();
+    
 
     $form = $this->createForm(DeliveryInfoType::class, $deliveryInfo);
     $form->handleRequest($request);
