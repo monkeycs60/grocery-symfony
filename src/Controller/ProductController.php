@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,6 +19,20 @@ class ProductController extends AbstractController
 
         return $this->render('product/index.html.twig', [
             'products' => $products
+        ]);
+    }
+
+    // Trouve un produit par la query dans la barre de recherche
+    #[Route('/product/search', name: 'app_product_search')]
+    public function search(ProductRepository $productRepository, Request $request): Response
+    {
+        $searchQuery = $request->query->get('query', '');
+
+        $products = $productRepository->findBySearchQuery($searchQuery);
+
+        return $this->render('product/search.html.twig', [
+            'products' => $products,
+            'searchQuery' => $searchQuery
         ]);
     }
   
@@ -35,4 +50,5 @@ class ProductController extends AbstractController
         'product' => $product
     ]);
 }
+    
 }
