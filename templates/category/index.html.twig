@@ -7,32 +7,32 @@
 
 {% block body %}
 	<div class="container py-12">
-		<h4>Produits dans la catégorie
+		<h5 class="text-center">Produits dans la catégorie
 			{{ category.name }}
-		</h4>
-		<div class="row pt-8">
-			<div class="col-12 col-md-12">
+		</h5>
+		<div class="row pt-8 justify-content-center ">
+			<div class="col-12 col-md-10">
 				<div class="container">
-					<div class="row">
+					<div class="row justify-content-center">
 						{% for product in products %}
 							<div class="col-md-3 mb-4">
 								<div class="card card-custom position-relative">
-									{% if product.discount > 0 %}
-										<div class="card-discount">
-											<img src="{{ asset('/images/discount.png') }}" class="card-discount-svg" alt="discount">
-											<span class"discount-number">-{{ product.discount }}%</span>
-										</div>
-									{% endif %}
-									<div class="card-price">{{ ((product.price / 100) - ((product.price / 100) * (product.discount / 100))) | number_format(2, ',', '') }}€ /
-										{{product.volume}}</div>
-									{% if product.images|length > 0 %}
-										{% set image = product.images.first %}
-										<img src="{{ asset('images/products/' ~ image.imageName) }}" style="width: 200px; height: 150px" class="card-img-top object-fit-cover " alt="...">
-									{% else %}
-										<img src="{{ asset('/images/product-placeholder.png') }}" style="width:100%; height: 170px" class="card-img-top object-fit-cover" alt="...">
-
-
-									{% endif %}
+									<a href="/product/{{product.slug}}">
+										{% if product.discount > 0 %}
+											<div class="card-discount">
+												<img src="{{ asset('/images/discount.png') }}" class="card-discount-svg" alt="discount">
+												<span class"discount-number">-{{ product.discount }}%</span>
+											</div>
+										{% endif %}
+										<div class="card-price">{{ ((product.price / 100) - ((product.price / 100) * (product.discount / 100))) | number_format(2, ',', '') }}€ /
+											{{product.volume}}</div>
+										{% if product.images|length > 0 %}
+											{% set image = product.images.first %}
+											<img src="{{ asset('images/products/' ~ image.imageName) }}" style="width: 200px; height: 150px" class="card-img-top object-fit-cover pt-5" alt="...">
+										{% else %}
+											<img src="{{ asset('/images/product-placeholder.png') }}" style="width:100%; height: 170px" class="card-img-top object-fit-cover" alt="...">
+										{% endif %}
+									</a>
 									<div class="card-custom-body p-3">
 										<div class="d-flex flex-column ">
 											<a href="/product/{{product.slug}}" class="h6" style="height: 70px;">{{ product.name }}</a>
@@ -57,7 +57,7 @@
 
 											</div>
 
-											<a href="#" class="">
+											<a href="{{path("app_cart_add", {id: product.id})}}" class="">
 												<img src="{{ asset('/images/cart.svg') }}" class="hover-cart" style="width: 25px" alt="shopping cart">
 											</a>
 										</div>

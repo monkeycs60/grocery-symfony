@@ -55,9 +55,13 @@
 									<td class="align-middle">{{ (item.quantity * ((item.product.price / 100) - ((item.product.price / 100) * (item.product.discount / 100)))) | number_format(2, ',', ' ') }}€</td>
 
 
-									<td>
-										<a href="{{ path('app_cart_decrease', {'id': item.product.id}) }}" class="btn btn-secondary btn-sm">-</a>
-										<a href="{{ path('app_cart_increase', {'id': item.product.id}) }}" class="btn btn-secondary btn-sm">+</a>
+									<td class="align-middle">
+										<a href="{{ path('app_cart_decrease', {'id': item.product.id}) }}" class="cart-button bg-danger">-</a>
+										<a href="{{ path('app_cart_increase', {'id': item.product.id}) }}" class="cart-button bg-success">+</a>
+										<a href="{{ path('app_cart_remove', {'id': item.product.id}) }}">
+											<img src="{{ asset('/images/trash.svg') }}" style="width: 16px; height: 25px;" alt="">
+										</a>
+
 									</td>
 
 								</tr>
@@ -78,7 +82,7 @@
 
 				<div
 					class="d-flex justify-content-between align-items-center mt-4">{# <a href="{{ path('product_list') }}" class="btn btn-outline-secondary">Continuer vos achats</a>
-																																																																																																																													<a href="{{ path('checkout') }}" class="btn btn-primary">Procéder au paiement</a> #}
+																																																																																																																																																																																			<a href="{{ path('checkout') }}" class="btn btn-primary">Procéder au paiement</a> #}
 				</div>
 			{% endif %}
 		</div>

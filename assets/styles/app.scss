@@ -43,6 +43,20 @@
     color: #52AA5E; /* couleur pour les liens non actifs */
 }
 
+.cart-button {
+    padding: 2px 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 30%;
+    text-decoration: none;
+    color: black;
+    margin: 0 8px;
+    &:hover {
+        filter: brightness(1.2);
+
+    }
+}
+
 .hover-cart {
     &:hover {
         scale: 1.15;

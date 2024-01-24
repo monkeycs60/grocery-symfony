@@ -10,28 +10,28 @@
 		{% for product in topDiscountedProducts %}
 			<div class="col-md-3 mb-4 ">
 				<div class="card card-custom-deals position-relative">
-					<div class="card-price d-flex flex-column">
-						<span class"h6">
-							{{ ((product.price / 100) - ((product.price / 100) * (product.discount / 100))) | number_format(2, ',', '') }}€ /
-							{{product.volume}}
-
-
-						</span>
-						<span>
-							<del>{{(product.price / 100) | number_format(2, ',', '')}}€
-							</del>
-						</span>
-					</div>
-					<div class="card-discount">
-						<img src="{{ asset('/images/discount.png') }}" class="card-discount-svg" alt="discount">
-						<span class"discount-number">-{{ product.discount }}%</span>
-					</div>
-					{% if product.images|length > 0 %}
-						{% set image = product.images.first %}
-						<img src="{{ asset('images/products/' ~ image.imageName) }}" style="width: 200px; height: 150px" class="card-img-top object-fit-cover " alt="...">
-					{% else %}
-						<img src="{{ asset('/images/product-placeholder.png') }}" class="card-img-top" alt="...">
-					{% endif %}
+					<a href="/product/{{product.slug}}">
+						<div class="card-price d-flex flex-column">
+							<span class"h6">
+								{{ ((product.price / 100) - ((product.price / 100) * (product.discount / 100))) | number_format(2, ',', '') }}€ /
+								{{product.volume}}
+							</span>
+							<span>
+								<del>{{(product.price / 100) | number_format(2, ',', '')}}€
+								</del>
+							</span>
+						</div>
+						<div class="card-discount">
+							<img src="{{ asset('/images/discount.png') }}" class="card-discount-svg" alt="discount">
+							<span class"discount-number">-{{ product.discount }}%</span>
+						</div>
+						{% if product.images|length > 0 %}
+							{% set image = product.images.first %}
+							<img src="{{ asset('images/products/' ~ image.imageName) }}" style="width: 200px; height: 150px" class="card-img-top object-fit-cover pt-5" alt="...">
+						{% else %}
+							<img src="{{ asset('/images/product-placeholder.png') }}" class="card-img-top" alt="...">
+						{% endif %}
+					</a>
 					<div class="card-custom-body p-3">
 						<div class="d-flex flex-column ">
 							<a href="/product/{{product.slug}}" class="h6" style="height: 70px;">{{ product.name }}</a>
@@ -56,7 +56,7 @@
 
 							</div>
 
-							<a href="#" class="">
+							<a href="{{path("app_cart_add", {id: product.id})}}" class="">
 								<img src="{{ asset('/images/cart.svg') }}" class="hover-cart" style="width: 25px" alt="shopping cart">
 							</a>
 						</div>
