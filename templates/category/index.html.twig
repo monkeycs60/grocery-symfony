@@ -16,7 +16,12 @@
 					<div class="row justify-content-center">
 						{% for product in products %}
 							<div class="col-md-3 mb-4">
-								<div class="card card-custom position-relative">
+								<div class="card card-custom position-relative {{ product.stockquantity == 0 ? 'bg-dark' : '' }}">
+									{% if product.stockquantity == 0 %}
+										<div class="card-out-of-stock position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
+											<span class="h5 text-light">Rupture de stock</span>
+										</div>
+									{% endif %}
 									<a href="/product/{{product.slug}}">
 										{% if product.discount > 0 %}
 											<div class="card-discount">
