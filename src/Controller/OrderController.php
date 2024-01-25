@@ -10,6 +10,7 @@ use App\Form\DeliveryInfoType;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use App\Service\CartService;
+use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -128,7 +129,7 @@ class OrderController extends AbstractController
 
     // Validation des infos après passage de la commande
     #[Route('/order/delivery', name: 'app_order_delivery')]
-    public function delivery(Request $request, EntityManagerInterface $em): Response
+    public function delivery(Request $request, EntityManagerInterface $em, MailerService $mailerService): Response
 {
     $user = $this->getUser(); // Récupérer l'utilisateur actuel
    
@@ -159,6 +160,8 @@ class OrderController extends AbstractController
         $em->persist($deliveryInfo);
         $em->persist($order);
         $em->flush();
+
+        $mailerService->sendEmail(content: 'Votre commande a bien été enregistrée, vous recevrez un mail de confirmation dès que votre commande sera prête à être récupérée.');
 
         $this->addFlash('success', 'Votre commande a été validée avec succès.');
         return $this->redirectToRoute('app_order_success'); // Rediriger vers une page de succès de commande
