@@ -22,7 +22,7 @@ Pour installer et exécuter Culinaria, suivez les étapes ci-dessous :
 
 1. **Clonez le dépôt :**
    ```bash
-   git clone [https://github.com/votre_username/Culinaria.git](https://github.com/monkeycs60/grocery-symfony.git)https://github.com/monkeycs60/grocery-symfony.git](https://github.com/monkeycs60/grocery-symfony.git)https://github.com/monkeycs60/grocery-symfony.git
+   git clone https://github.com/monkeycs60/grocery-symfony.git
    cd Culinaria
     ```
 
