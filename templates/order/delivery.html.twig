@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<section class="py-20">
+	<section class="py-20 col-md-10 mx-auto">
 		<h2>Informations de Livraison</h2>
 		{{ form_start(form) }}
 
@@ -17,12 +17,11 @@
     }
 }) }}
 
-		{# Utiliser les widgets de Symfony mais les cacher avec du CSS #}
 		<div style="display: none;">
 			{{ form_row(form.deliveryMethod) }}
 		</div>
 
-		{# Créer les boutons radio personnalisés qui sont liés aux widgets de Symfony #}
+		{# crée les boutons radio personnalisés qui sont liés aux widgets de Symfony #}
 		<div class="py-3">
 			<label class="fw-bold mb-2">Mode de livraison</label>
 			<div class="form-check">
