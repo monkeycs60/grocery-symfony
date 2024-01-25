@@ -1,32 +1,35 @@
-<?php 
+<?php
 namespace App\Service;
 
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Twig\Environment;
 
 class MailerService
 {
-    public function __construct(private MailerInterface $mailer)
+    private $mailer;
+    private $twig;
+
+    public function __construct(MailerInterface $mailer, Environment $twig)
     {
         $this->mailer = $mailer;
+        $this->twig = $twig;
     }
 
-    public function sendEmail($to = 'clement.serizay@gmail.com', $content = '
-    <p>See Twig integration for better HTML integration!</p>
-    '): void
+    public function sendEmail($to, $user, $deliveryInfo, $order)
     {
+        $content = $this->twig->render('emails/order_confirmation.html.twig', [
+            'user' => $user,
+            'deliveryInfo' => $deliveryInfo,
+            'order' => $order
+        ]);
+
         $email = (new Email())
             ->from('clement.serizay@gmail.com')
             ->to($to)
-            //->cc('cc@example.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
             ->subject('Confirmation de votre commande Culinaria !')
             ->html($content);
 
         $this->mailer->send($email);
-
-        // ...
     }
 }

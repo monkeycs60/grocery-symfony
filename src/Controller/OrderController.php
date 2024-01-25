@@ -161,7 +161,7 @@ class OrderController extends AbstractController
         $em->persist($order);
         $em->flush();
 
-        $mailerService->sendEmail(content: 'Votre commande a bien été enregistrée, vous recevrez un mail de confirmation dès que votre commande sera prête à être récupérée.');
+        $mailerService->sendEmail("clement.serizay@gmail.com", $user, $deliveryInfo, $order);
 
         $this->addFlash('success', 'Votre commande a été validée avec succès.');
         return $this->redirectToRoute('app_order_success'); // Rediriger vers une page de succès de commande
