@@ -4,8 +4,9 @@
 {% endblock %}
 
 {% block body %}
-	<section class="shopping-cart py-12">
-		<div class="container">
+	<section class="shopping-cart py-12 col-md-10 mx-auto">
+
+		<div class="container ">
 			<h5 class="mb-10">Votre panier</h5>
 			{% if data is empty %}
 				<div class="alert alert-info">Votre panier est vide.</div>
@@ -32,7 +33,7 @@
 											{% else %}
 												<img src="{{ asset('/images/product-placeholder.png') }}" alt="{{ item.product.name }}" class="img-fluid" style="width: 100px;">
 											{% endif %}
-											<div class="ms-3">
+											<div class="ms-3 d-none d-lg-block">
 												<strong>{{ item.product.name }}</strong>
 												<div class="small-font-size">{{ item.product.description }}</div>
 											</div>
@@ -58,10 +59,9 @@
 									<td class="align-middle">
 										<a href="{{ path('app_cart_decrease', {'id': item.product.id}) }}" class="cart-button bg-danger">-</a>
 										<a href="{{ path('app_cart_increase', {'id': item.product.id}) }}" class="cart-button bg-success">+</a>
-										<a href="{{ path('app_cart_remove', {'id': item.product.id}) }}">
+										<a class="" href="{{ path('app_cart_remove', {'id': item.product.id}) }}">
 											<img src="{{ asset('/images/trash.svg') }}" style="width: 16px; height: 25px;" alt="">
 										</a>
-
 									</td>
 
 								</tr>
@@ -70,7 +70,7 @@
 					</table>
 				</div>
 				<div class="cart-summary mt-4 bg-light p-3 rounded">
-					<div class="d-flex justify-content-between">
+					<div class="d-flex flex-column flex-lg-row gap-3 gap-lg-0 justify-content-between">
 						<span>
 							<strong>Nombre total d'articles :</strong>
 							{{ totalQuantity }}</span>
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 
-				<div class="d-flex justify-content-between align-items-center mt-4">
+				<div class="d-flex flex-column flex-lg-row gap-6 gap-lg-0  justify-content-between align-items-center mt-4">
 					<a href="/product" class="btn btn-outline-primary">Continuer vos achats</a>
 					<a href="/order/checkout" class="btn btn-secondary">Procéder au paiement</a>
 				</div>

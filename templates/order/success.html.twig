@@ -8,20 +8,18 @@
 			margin-bottom: 10px;
 		}
 	</style>
-	<section class="py-20">
-		<div class="container justify-content-center col-md-12 justify-content-center align-items-center  text-center">
+	<section class="py-20 w-100">
+		<div class="container justify-content-center col-12 col-md-12 justify-content-md-center align-items-md-center text-lg-center  text-center">
 			<div>
 				<img src="{{ asset('/images/check.svg')}}" alt="Success" style="width: 100px;">
 			</div>
 
-			<div class="p-8 w-50 mx-auto">
+			<div class="p-8 success-size mx-auto">
 				<h3 class="bg-secondary p-5 rounded-3">Commande réussie !</h3>
-				<p>Merci pour votre commande,
+				<p class="mt-8 mt-md-0 ">Merci pour votre commande,
 					{{ app.user.username }}.</p>
 				<p>Vous recevrez bientôt tous les détails de votre commande dans un mail récapitulatif !</p>
 			</div>
-
-
 			{% set lastOrder = app.user.orders | last %}
 
 			{% if lastOrder %}

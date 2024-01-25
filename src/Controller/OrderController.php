@@ -111,7 +111,7 @@ class OrderController extends AbstractController
         // On ajoute le statut de la commande
         $order->setStatus('En attente du choix de livraison');
 
-        // On enregistre la commande en BDD
+        // On suit les modifications de la commande
         $em->persist($order);
 
         // On enregistre la commande en BDD

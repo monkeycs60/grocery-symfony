@@ -25,6 +25,21 @@
     font-size: 1.5rem;
 }
 
+.navbar-style {
+   width: 100%;
+
+    // breakpoints for 768 and more
+    @media (min-width: 768px) {
+       height: 70px;
+       width: 100%; 
+       z-index: 999;
+    }
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
 // hover effect 
 .hover-effect {
     &:hover {
@@ -57,6 +72,20 @@
     }
 }
 
+@media (max-width: 576px) {
+    .cart-button {
+        padding: 2px 6px;
+        min-width: 25px;
+        height: 25px;
+        margin: 3px;
+    }
+
+    .cart-button img {
+        width: 12px; /* Réduisez la taille de l'image de la corbeille */
+        height: auto;
+    }
+}
+
 .hover-cart {
     &:hover {
         scale: 1.15;
@@ -64,5 +93,18 @@
     transition: all 0.3s ease-in-out;
 }
 
+.success-size {
+    width: 100%;
+    @media (min-width: 768px) {
+       width: 50%; 
+    }
+}
+
+.table-height {
+    height: 180px;
+    @media (min-width: 768px) {
+       height: auto; 
+    }
+}
 
 
