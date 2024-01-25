@@ -24,15 +24,13 @@ class UserProfileType extends AbstractType
                 new Length([
                     'min' => 3,
                     'minMessage' => 'Votre nom d\'utilisateur doit contenir au moins {{ limit }} caractères',
-                    // max length allowed by Symfony for security reasons
                     'max' => 255,
                 ]),
             ],
         ]
         )
         ->add('plainPassword', PasswordType::class, [
-                                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+                // Au lieu d'être encodé ici, le mot de passe est encodé dans le controller
                 'required' => false,
                 'label' => "Nouveau mot de passe",
                 'mapped' => false,
@@ -41,7 +39,6 @@ class UserProfileType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
@@ -54,7 +51,6 @@ class UserProfileType extends AbstractType
                 new Length([
                     'min' => 3,
                     'minMessage' => 'Votre adresse doit contenir au moins {{ limit }} caractères',
-                    // max length allowed by Symfony for security reasons
                     'max' => 255,
                 ]),
             ],

@@ -25,10 +25,9 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            // render sidebar
-            ->setTitle('Grocery Symfony')
-            ->renderContentMaximized()
-            ->renderSidebarMinimized();
+        ->setTitle('Grocery Symfony')
+        ->renderContentMaximized()
+        ->renderSidebarMinimized();
     }
 
     public function configureMenuItems(): iterable

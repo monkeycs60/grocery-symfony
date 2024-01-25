@@ -5,6 +5,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use App\Service\CartService;
 
+// Permet d'hydrater le panier dans tous les templates twig
 class CartExtension extends AbstractExtension
 {
     private $cartService;

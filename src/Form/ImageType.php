@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ImageType extends AbstractType
 {
+    // Pour ajouter plusieurs images à un produit via Vich et EasyAdmin
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

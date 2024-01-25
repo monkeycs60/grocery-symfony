@@ -33,28 +33,23 @@ class DeliveryInfoType extends AbstractType
                 'Livraison à domicile' => 'Livraison à domicile',
             ],
             'label' => 'Mode de livraison',
-            // 'preferred_choices' sera configuré dans le contrôleur.
         ])
             ->add('orderInfo', EntityType::class, [
                 'class' => Order::class,
-                // Enlève les commandes déjà validées
+                // Enlève les commandes déjà validées pour l'utilisateur connecté
                   'query_builder' => function (OrderRepository $er) use ($options) {
                 return $er->createQueryBuilder('o')
             ->where('o.status != :status')
-            ->andWhere('o.user = :user') // Ajoutez cette ligne
+            ->andWhere('o.user = :user') 
             ->setParameters([
                 'status' => 'Validé',
-                'user' => $options['user'] // Utilisez l'utilisateur passé en option
+                'user' => $options['user'] 
             ]);
             },
 'choice_label' => 'id',
 'label' => 'Commande n° (utile si vous avez plusieurs commandes en attente de validation)',
-            ])
-             // Écouteur d'événements pour prédéfinir une valeur
-    
+            ])    
         ;
-
-        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

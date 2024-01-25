@@ -36,7 +36,7 @@ class ProductRepository extends ServiceEntityRepository
     }
 
         /**
-     * @return Product[] Returns an array of Product objects based on search query
+     * @return Product[] Retourne un tableau de produits correspondant à la recherche
      */
     public function findBySearchQuery(string $searchQuery): array
     {

@@ -36,7 +36,6 @@ class ProductStockCrudController extends AbstractCrudController
                 'disabled' => true, // Disable the field so it cannot be edited
             ]),
             IntegerField::new('stockquantity', 'Stock Quantity'),
-            // You might want to add more fields that are relevant to stock management
         ];
     }
 
