@@ -161,7 +161,7 @@ class OrderController extends AbstractController
         $em->persist($order);
         $em->flush();
 
-        $mailerService->sendEmail("clement.serizay@gmail.com", $user, $deliveryInfo, $order);
+        $mailerService->sendEmail($order->getUser()->getEmail(), $user, $deliveryInfo, $order);
 
         $this->addFlash('success', 'Votre commande a été validée avec succès.');
         return $this->redirectToRoute('app_order_success'); // Rediriger vers une page de succès de commande
