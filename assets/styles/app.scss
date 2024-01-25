@@ -1,7 +1,6 @@
 @import 'custom.scss';
 @import 'theme.scss';
 @import '~bootstrap/scss/bootstrap';
-@import 'max-width-size.scss';
 @import 'form.scss';
 @import 'home.scss';
 
@@ -36,11 +35,11 @@
     }
 }
 
+// Pour le responsive de la navbar (hamburger)
 .custom-toggler .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-// hover effect 
 .hover-effect {
     &:hover {
         background-color: #fa983c;
@@ -54,8 +53,9 @@
     padding: 2px 5px !important;
 }
 
+/* couleur pour les liens non actifs */
 .nav-link.inactive {
-    color: #52AA5E; /* couleur pour les liens non actifs */
+    color: #52AA5E; 
 }
 
 .cart-button {
@@ -81,7 +81,7 @@
     }
 
     .cart-button img {
-        width: 12px; /* Réduisez la taille de l'image de la corbeille */
+        width: 12px; 
         height: auto;
     }
 }
