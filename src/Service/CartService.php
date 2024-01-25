@@ -22,16 +22,22 @@ class CartService
     }
 
     public function addProduct(int $productId)
-    {
+{
+    $product = $this->productRepository->find($productId);
+    if ($product && $product->getStockquantity() > 0) {
         $session = $this->getSession();
         $cart = $session->get('cart', []);
         if (isset($cart[$productId])) {
-            $cart[$productId]++;
+            // Vérifiez si l'augmentation de la quantité ne dépasse pas le stock
+            if ($cart[$productId] < $product->getStockquantity()) {
+                $cart[$productId]++;
+            }
         } else {
             $cart[$productId] = 1;
         }
         $session->set('cart', $cart);
     }
+}
 
     public function removeProduct(int $productId)
     {
@@ -44,14 +50,20 @@ class CartService
     }
 
     public function increaseQuantity(int $productId)
-    {
+{
+    $product = $this->productRepository->find($productId);
+    if ($product) {
         $session = $this->getSession();
         $cart = $session->get('cart', []);
         if (isset($cart[$productId])) {
-            $cart[$productId]++;
+            // Vérifiez si l'augmentation de la quantité ne dépasse pas le stock
+            if ($cart[$productId] < $product->getStockquantity()) {
+                $cart[$productId]++;
+            }
         }
-       $session->set('cart', $cart);
+        $session->set('cart', $cart);
     }
+}
 
     public function decreaseQuantity(int $productId)
     {
